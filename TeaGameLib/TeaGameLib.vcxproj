@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\External\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,6 +99,13 @@
       <Command>xcopy "$(ProjectDir)include" "$(ProjectDir)$(Configuration)\include\include" /Y/s/e/i
 move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configuration)\include\$(ProjectName)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>rd  $(ProjectDir)$(Configuration)\include /s/q</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2-staticd.lib;SDL2maind.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -120,7 +127,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\External\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +139,13 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
       <Command>xcopy "$(ProjectDir)include" "$(ProjectDir)$(Configuration)\include\include" /Y/s/e/i
 move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configuration)\include\$(ProjectName)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>rd  $(ProjectDir)$(Configuration)\include /s/q</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2-static.lib;SDL2main.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
