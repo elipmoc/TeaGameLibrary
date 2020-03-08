@@ -10,9 +10,5 @@
 namespace teaGameLib {
     class CmdBuilder {
     public:
-        template<typename Msg>
-        static Cmd<Msg> EndGame() {
-            return Cmd<Msg>(EndGameCmd<Msg>{});
-        }
     };
 }

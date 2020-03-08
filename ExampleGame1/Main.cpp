@@ -1,5 +1,5 @@
 #include "TeaGameLib/App.hpp"
-#include "TeaGameLib/CmdBuilder.hpp"
+#include "TeaGameLib/GameWorld.hpp"
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/App/InternalGameLib/DrawPrimitive.hpp"
@@ -31,7 +31,7 @@ int main(int , char** )
 		auto cmd = (
 			//ウインドウのバツボタンが押されたとき
 			msg == "QuitEvent" ?
-			tea::CmdBuilder::EndGame<Msg>() :
+			tea::GameWorld::EndGame<Msg>() :
 			//毎フレーム呼ばれるアップデートの時
 			msg == "Update" ?
 			Cmd::None() :
