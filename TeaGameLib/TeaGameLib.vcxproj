@@ -187,13 +187,8 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\App\InternalGameLib\InternalGameLibHandlers.hpp" />
     <ClInclude Include="include\App\ProcessInput.hpp" />
     <ClInclude Include="include\App\UpdateData.hpp" />
-    <ClInclude Include="include\CmdBuilder.hpp" />
-    <ClInclude Include="include\CmdImpls\EndGameCmd.hpp" />
-    <ClInclude Include="include\CmdImpls\IdCmd.hpp" />
     <ClInclude Include="include\GameWorld.hpp" />
     <ClInclude Include="include\Input.hpp" />
-    <ClInclude Include="include\SubImpls\KeyInputEventSub.hpp" />
-    <ClInclude Include="include\SubImpls\QuitEventSub.hpp" />
     <ClInclude Include="include\WindowEvent.hpp" />
     <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp" />
   </ItemGroup>
