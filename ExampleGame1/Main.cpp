@@ -71,12 +71,16 @@ int main(int , char** )
 		tea::View::DrawBall(sdlHandlers, model.x, model.y, 15);
 	};
 
-	//アプリケーションスタート
-	const auto app = tea::App{
-		tea::Actor{init,update,subscription,view},
-		Msg{"Update"},
+	//アプリケーションオブジェクト作成
+	auto app = tea::App::CreateApp(
 		tea::WindowData{"TestWindow",100,100,1024,768}
-	};
+	);
+
+	//アプリケーションスタート
+	app.Start(
+		tea::Actor{ init,update,subscription,view },
+		Msg{ "Update" }
+	);
 
 	return 0;
 }

@@ -8,65 +8,74 @@
 #include "../InternalGameLib/DrawService.hpp"
 
 namespace teaGameLib {
-	template<typename InitFunc, typename UpdateFunc, typename SubscriptionFunc, typename ViewFunc>
+
 	struct App {
+	private:
 
-		using StartActor = Actor<InitFunc, UpdateFunc,SubscriptionFunc, ViewFunc>;
-		using Msg = typename StartActor::Msg;
-		using Model = typename StartActor::Model;
-		using OptMsg = typename Cmd<Msg>::OptMsg;
-		using CustomUpdateData = UpdateData<Model, Msg>;
+		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
+		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr) :internalGameLibHandlersPtr(internalGameLibHandlersPtr) {}
 
-		App(StartActor startActor, Msg updateMsg,WindowData windowData)
-		{
+	public:
+
+		static App CreateApp(WindowData windowData) {
+			std::optional<InternalGameLibHandlersPtr> internalGameLibHandlers = GameInitializer::Init(windowData);
+			if (internalGameLibHandlers.has_value() == false) {
+				throw "";
+			}
+			return App{ internalGameLibHandlers.value() };
+		}
+
+
+		template<typename StartActor, typename Msg>
+		void Start(StartActor startActor, Msg updateMsg) {
 			std::queue<Msg> queue;
 			EffectHandler effectHandler{ GameStates{} };
 			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
-			InitData<Model> initData = startActor.InvokeInitFunc();
-			Model&& model = std::move(initData.model);
-			std::optional<InternalGameLibHandlersPtr> internalGameLibHandlers = GameInitializer::Init(windowData);
-			if (internalGameLibHandlers.has_value()) {
-				while (effectParams.effectHandler.GetIsRunning()) {
-					effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
-					startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
-					ticksCount = FpsWaitTicks(ticksCount);
-					effectParams.effectMsgQueue.InQueueMsg(updateMsg);
+			auto initData = startActor.InvokeInitFunc();
+			auto&& model = std::move(initData.model);
+			while (effectParams.effectHandler.GetIsRunning()) {
+				effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
+				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
+				ticksCount = FpsWaitTicks(ticksCount);
+				effectParams.effectMsgQueue.InQueueMsg(updateMsg);
 
-					model = std::move(
-						UpdateMsgQueue(queue,std::move(model), startActor, effectParams)
-					);
+				model = std::move(
+					UpdateMsgQueue(queue, std::move(model), startActor, effectParams)
+				);
 
-					DrawService::Draw(internalGameLibHandlers.value(), [&](auto& renderer) {startActor.InvokeViewFunc(model, renderer); });
-				}
-				GameShutDown::ShutDown(std::move(internalGameLibHandlers.value()));
+				DrawService::Draw(internalGameLibHandlersPtr, [&](auto& renderer) {startActor.InvokeViewFunc(model, renderer); });
 			}
+			GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 		}
+
 	private:
 
+		template<typename StartActor, typename Msg, typename Model>
 		Model&& UpdateMsgQueue(std::queue<Msg>& queue, Model&& model, const StartActor startActor, EffectParams<Msg>& effectParams) {
 			while (true) {
-				OptMsg optMsg = DeQueueMsg(queue);
+				auto optMsg = DeQueueMsg<Msg,Model>(queue);
 				if (optMsg.has_value() == false)break;
 				model = std::move(Update(std::move(model), optMsg.value(), startActor, effectParams));
 			}
 			return std::move(model);
 		}
 
-		Model&& Update(Model&& model,const Msg& msg,const StartActor startActor, EffectParams<Msg>& effectParams) {
-			CustomUpdateData updateData
+		template<typename StartActor, typename Msg, typename Model>
+		Model&& Update(Model&& model, const Msg& msg, const StartActor startActor, EffectParams<Msg>& effectParams) {
+			auto updateData
 				= startActor.InvokeUpdateFunc(msg, std::move(model));
 			model = std::move(updateData.model);
 			updateData.cmd.InvokeRunFunc(effectParams);
 			return std::move(model);
 		}
 
+		template<typename Msg, typename Model>
 		std::optional<Msg> DeQueueMsg(std::queue<Msg>& queue) {
 			if (queue.size() == 0)return std::optional<Msg>{std::nullopt};
 			auto msg = queue.front();
 			queue.pop();
 			return std::optional<Msg>{msg};
 		}
-
 	};
 }
