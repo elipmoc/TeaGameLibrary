@@ -44,6 +44,11 @@ namespace teaGameLib {
 		}
 
 		static Effect<Msg> None() { return Effect<Msg>{}; }
+		static Effect<Msg> Id(Msg msg) {
+			return {
+				[msg](EffectParams<Msg> effectParams) {effectParams.effectMsgQueue.InQueueMsg(msg); }
+			};
+		}
 	};
 
 	template<typename Msg>
