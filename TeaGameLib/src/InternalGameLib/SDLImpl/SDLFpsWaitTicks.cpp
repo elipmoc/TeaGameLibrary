@@ -1,6 +1,6 @@
 #pragma once
+#include "Window/App/InternalGameLib/FpsWaitTicks.hpp"
 #include "SDL/SDL.h"
-#include "App/InternalGameLib/FpsWaitTicks.hpp"
 
 namespace teaGameLib {
 

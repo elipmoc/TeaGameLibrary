@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/Effect.hpp"
-#include "App/EffectParams.hpp"
+#include "Window/App/EffectParams.hpp"
 
 namespace teaGameLib {
 	struct WindowEvent {

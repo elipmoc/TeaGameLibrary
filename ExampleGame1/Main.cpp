@@ -1,8 +1,8 @@
-#include "TeaGameLib/App.hpp"
+#include "TeaGameLib/Window/App.hpp"
 #include "TeaGameLib/GameWorld.hpp"
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
-#include "TeaGameLib/App/InternalGameLib/DrawPrimitive.hpp"
+#include "TeaGameLib/Window/App/InternalGameLib/DrawPrimitive.hpp"
 
 namespace tea = teaGameLib;
 

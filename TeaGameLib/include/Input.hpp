@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Platform/Effect.hpp"
-#include "App/EffectParams.hpp"
-#include "App/GameStates/KeyStates.hpp"
+#include "Window/App/EffectParams.hpp"
+#include "Window/App/GameStates/KeyStates.hpp"
 
 namespace teaGameLib {
 	struct Input {

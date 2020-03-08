@@ -1,4 +1,4 @@
-#include "App/InternalGameLib/DrawPrimitive.hpp"
+#include "Window/App/InternalGameLib/DrawPrimitive.hpp"
 #include "SDLHandlers.hpp"
 #include "SDL/SDL.h"
 

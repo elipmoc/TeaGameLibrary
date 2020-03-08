@@ -1,4 +1,4 @@
-#include "App/InternalGameLib/GameInitializer.hpp"
+#include "Window/App/InternalGameLib/GameInitializer.hpp"
 #include "SDLHandlers.hpp"
 #include "SDL/SDL.h"
 

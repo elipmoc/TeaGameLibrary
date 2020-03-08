@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include <optional>
-#include "EffectParams.hpp"
+#include "../Window/App/EffectParams.hpp"
 
 namespace teaGameLib {
 	template<typename Msg>

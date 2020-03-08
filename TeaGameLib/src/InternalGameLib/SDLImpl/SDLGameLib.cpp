@@ -1,4 +1,4 @@
-#include "App/InternalGameLib/InternalGameLib.hpp"
+#include "Window/App/InternalGameLib/InternalGameLib.hpp"
 #include "SDL/SDL.h"
 
 namespace teaGameLib {
