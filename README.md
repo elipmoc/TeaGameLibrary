@@ -7,7 +7,7 @@ Visual Studio 2019でしか動くことを想定してません
 ## Feature
 
 - [ ] CmdとSubにBindをサポート
-- [ ] Vector2Dのサポート
+- [x] Vector2Dのサポート
 - [ ] Sprite表示のサポート
 - [ ] 簡易的な物理のサポート
 - [ ] constexprのサポート
