@@ -14,8 +14,12 @@ int main(int , char** )
 	//Msg
 	using Msg = std::string;
 
+	//Cmd,Subの型省略
+	using Cmd = tea::Cmd<Msg>;
+	using Sub = tea::Sub<Msg>;
+
 	//モデル初期値
-	Model initModel{ 0,0 };
+	Model initModel{ 512,384 };
 
 	//Init関数
 	const auto init = [&initModel]() {
@@ -23,44 +27,37 @@ int main(int , char** )
 	};
 
 	//Update関数
-	const auto update = [](Msg msg, Model model) {
-		using Cmd = tea::Cmd<Msg>;
-		auto cmd = (
-			//ウインドウのバツボタンが押されたとき
-			msg == "QuitEvent" ?
-			tea::GameWorld::EndGame<Msg>() :
-			//毎フレーム呼ばれるアップデートの時
-			msg == "Update" ?
-			Cmd::None() :
-			//右に移動
-			msg == "RightMove" ?
-			model.x += 5, Cmd::None() :
-			//左に移動
-			msg == "LeftMove" ?
-			model.x -= 5, Cmd::None() :
-			//上に移動
-			msg == "UpMove" ?
-			model.y -= 5, Cmd::None() :
-			//下に移動c
-			msg == "DownMove" ?
-			model.y += 5, Cmd::None() :
-			//その他
-			Cmd::None()
-			);
-		return tea::UpdateData{
-			std::move(model),
-			cmd
-		};
+	const auto update = [](Msg msg, Model model)->tea::UpdateData<Model, Msg> {
+		//ゲーム終了をする
+		if (msg == "QuitEvent")
+			return { std::move(model),tea::GameWorld::EndGame<Msg>() };
+		//右に移動
+		if (msg == "RightMove")	model.x += 5;
+		//左に移動
+		if (msg == "LeftMove") model.x -= 5;
+		//上に移動
+		if (msg == "UpMove") model.y -= 5;
+		//下に移動
+		if (msg == "DownMove") model.y += 5;
+		//毎フレーム呼ばれるアップデート
+		if (msg == "Update"); //今は特に何もしない
+
+		return { std::move(model),Cmd::None() };
 	};
 
 	//Subscription関数
 	const auto subscription = [](const Model& model) {
-		return tea::Cmd<Msg>::Batch(
-			tea::Input::KeyInput(tea::KeyCode::KEY_D, Msg{ "RightMove" }),
-			tea::Input::KeyInput(tea::KeyCode::KEY_A, Msg{ "LeftMove" }),
-			tea::Input::KeyInput(tea::KeyCode::KEY_W, Msg{ "UpMove" }),
-			tea::Input::KeyInput(tea::KeyCode::KEY_S, Msg{ "DownMove" }),
-			tea::WindowEvent::Quit(Msg{ "QuitEvent" })
+		using Input = tea::Input;
+		using WindowEvent = tea::WindowEvent;
+
+		return Cmd::Batch(
+			//キー入力イベントがあったら各種メッセージを送る
+			Input::KeyInput(tea::KeyCode::KEY_D, Msg{ "RightMove" }),
+			Input::KeyInput(tea::KeyCode::KEY_A, Msg{ "LeftMove" }),
+			Input::KeyInput(tea::KeyCode::KEY_W, Msg{ "UpMove" }),
+			Input::KeyInput(tea::KeyCode::KEY_S, Msg{ "DownMove" }),
+			//Windowからの終了イベントがあった時、QuitEventメッセージを送る（バツボタンを押した時など)
+			WindowEvent::Quit(Msg{ "QuitEvent" })
 		);
 	};
 
@@ -70,14 +67,12 @@ int main(int , char** )
 	};
 
 	//アプリケーションオブジェクト作成
-	auto app = tea::App::CreateApp(
-		tea::WindowData{"TestWindow",100,100,1024,768}
-	);
+	auto app = tea::App::CreateApp({ "TestWindow",100,100,1024,768 });
 
 	//アプリケーションスタート
 	app.Start(
 		tea::Actor{ init,update,subscription,view },
-		Msg{ "Update" }
+		Msg{ "Update" }//毎フレーム一回呼ばれるのでその時のメッセージを設定
 	);
 
 	return 0;
