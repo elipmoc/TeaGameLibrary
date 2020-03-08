@@ -168,7 +168,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
   <ItemGroup>
     <ClInclude Include="include\App.hpp" />
     <ClInclude Include="include\App\Actor.hpp" />
-    <ClInclude Include="include\App\Effect.hpp" />
+    <ClInclude Include="include\Platform\Effect.hpp" />
     <ClInclude Include="include\App\EffectHandler.hpp" />
     <ClInclude Include="include\App\EffectMsgQueue.hpp" />
     <ClInclude Include="include\App\EffectMsgQueueFactory\CreateCommonEffectMsgQueue.hpp" />

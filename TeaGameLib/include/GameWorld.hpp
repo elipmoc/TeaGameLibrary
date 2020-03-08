@@ -1,6 +1,6 @@
 #pragma once
 
-#include "App/Effect.hpp"
+#include "Platform/Effect.hpp"
 #include "App/EffectParams.hpp"
 #include "App/GameStates/KeyStates.hpp"
 

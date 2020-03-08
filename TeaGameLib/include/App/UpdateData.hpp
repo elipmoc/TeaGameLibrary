@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Effect.hpp"
+#include "Platform/Effect.hpp"
 
 namespace teaGameLib {
 
