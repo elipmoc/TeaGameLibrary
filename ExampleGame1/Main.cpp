@@ -67,8 +67,8 @@ int main(int , char** )
 	};
 
 	//View関数
-	const auto view = [](const Model& model, auto& sdlHandlers) {
-		tea::View::DrawBall(sdlHandlers, model.x, model.y, 15);
+	const auto view = [](const Model& model, tea::View& view) {
+		view.DrawBall(model.x, model.y, 15);
 	};
 
 	//アプリケーションオブジェクト作成

@@ -1,7 +1,7 @@
 #pragma once
 #include "InitData.hpp"
 #include "UpdateData.hpp"
-#include "../../InternalGameLib/InternalGameLibHandlers.hpp"
+#include "../../View.hpp"
 
 namespace teaGameLib {
 
@@ -29,7 +29,7 @@ namespace teaGameLib {
 
 		InitData<Model> InvokeInitFunc()const { return initFunc(); }
 		UpdateData<Model, Msg> InvokeUpdateFunc(Msg msg, Model&& model)const { return updateFunc(msg, std::move(model)); }
-		void  InvokeViewFunc(const Model& model, InternalGameLibHandlersPtr& sdlHandlers)const { viewFunc(model, sdlHandlers); }
+		void  InvokeViewFunc(const Model& model, View& view)const { viewFunc(model, view); }
 		Sub<Msg> InvokeSubscriptionFunc(const Model& model)const { return subscriptionFunc(model); }
 	};
 };

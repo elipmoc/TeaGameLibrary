@@ -4,6 +4,8 @@
 
 namespace teaGameLib {
 	struct View {
-		static void DrawBall(InternalGameLibHandlersPtr&, const int x, const int y, const int thickness);
+		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
+		View(InternalGameLibHandlersPtr& internalGameLibHandlersPtr) :internalGameLibHandlersPtr(internalGameLibHandlersPtr) {}
+		void DrawBall(const int x, const int y, const int thickness);
 	};
 }

@@ -10,7 +10,7 @@ namespace teaGameLib {
 		template<typename ViewFunc>
 		static void Draw(InternalGameLibHandlersPtr& internalGameLibHandlers, ViewFunc viewFunc) {
 			RenderClear(internalGameLibHandlers);
-			viewFunc(internalGameLibHandlers);
+			viewFunc();
 			RenderPresent(internalGameLibHandlers);
 		}
 	};

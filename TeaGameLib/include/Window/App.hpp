@@ -2,6 +2,7 @@
 #include "App/Actor.hpp"
 #include"App/ProcessInput.hpp"
 #include "App/EffectParams.hpp"
+#include "../View.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/GameInitializer.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
@@ -13,7 +14,9 @@ namespace teaGameLib {
 	private:
 
 		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
-		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr) :internalGameLibHandlersPtr(internalGameLibHandlersPtr) {}
+		View view;
+		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)
+			:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }) {}
 
 	public:
 
@@ -44,7 +47,7 @@ namespace teaGameLib {
 					UpdateMsgQueue(queue, std::move(model), startActor, effectParams)
 				);
 
-				DrawService::Draw(internalGameLibHandlersPtr, [&](auto& renderer) {startActor.InvokeViewFunc(model, renderer); });
+				DrawService::Draw(internalGameLibHandlersPtr, [&]() {startActor.InvokeViewFunc(model, view); });
 			}
 			GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 		}
