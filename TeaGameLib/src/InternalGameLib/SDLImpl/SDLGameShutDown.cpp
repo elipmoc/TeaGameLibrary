@@ -1,4 +1,4 @@
-#include "Window/App/InternalGameLib/GameShutDown.hpp"
+#include "InternalGameLib/GameShutDown.hpp"
 #include "SDLHandlers.hpp"
 #include "SDL/SDL.h"
 

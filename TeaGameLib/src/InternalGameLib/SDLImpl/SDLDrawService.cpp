@@ -1,4 +1,4 @@
-#include "Window/App/InternalGameLib/DrawService.hpp"
+#include "InternalGameLib/DrawService.hpp"
 #include "SDL/SDL.h"
 #include "SDLHandlers.hpp"
 

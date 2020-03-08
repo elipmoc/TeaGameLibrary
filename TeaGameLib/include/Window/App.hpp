@@ -2,10 +2,10 @@
 #include "App/Actor.hpp"
 #include"App/ProcessInput.hpp"
 #include "App/EffectParams.hpp"
-#include "App/InternalGameLib/FpsWaitTicks.hpp"
-#include "App/InternalGameLib/GameInitializer.hpp"
-#include "App/InternalGameLib/GameShutDown.hpp"
-#include "App/InternalGameLib/DrawService.hpp"
+#include "../InternalGameLib/FpsWaitTicks.hpp"
+#include "../InternalGameLib/GameInitializer.hpp"
+#include "../InternalGameLib/GameShutDown.hpp"
+#include "../InternalGameLib/DrawService.hpp"
 
 namespace teaGameLib {
 	template<typename InitFunc, typename UpdateFunc, typename SubscriptionFunc, typename ViewFunc>

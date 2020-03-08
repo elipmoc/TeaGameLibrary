@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../InitData.hpp"
+#include "../Window/App/InitData.hpp"
 #include "InternalGameLibHandlers.hpp"
 #include <optional>
 

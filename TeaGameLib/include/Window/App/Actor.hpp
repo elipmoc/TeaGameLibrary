@@ -1,7 +1,7 @@
 #pragma once
 #include "InitData.hpp"
 #include "UpdateData.hpp"
-#include "InternalGameLib/InternalGameLibHandlers.hpp"
+#include "../../InternalGameLib/InternalGameLibHandlers.hpp"
 
 namespace teaGameLib {
 

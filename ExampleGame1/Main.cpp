@@ -69,7 +69,7 @@ int main(int , char** )
 
 	//View関数
 	const auto view = [](const Model& model, auto& sdlHandlers) {
-		tea::DrawBall(sdlHandlers, model.x, model.y, 15);
+		tea::View::DrawBall(sdlHandlers, model.x, model.y, 15);
 	};
 
 	//アプリケーションスタート

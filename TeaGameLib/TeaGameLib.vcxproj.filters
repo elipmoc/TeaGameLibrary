@@ -45,27 +45,6 @@
     <ClInclude Include="include\Window\App\GameStates\KeyStates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\DrawPrimitive.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\DrawService.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\FpsWaitTicks.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\GameInitializer.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\GameShutDown.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\InternalGameLib.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\App\InternalGameLib\InternalGameLibHandlers.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\Actor.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -93,6 +72,27 @@
     <ClInclude Include="include\View.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="include\InternalGameLib\DrawService.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InternalGameLib\GameInitializer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InternalGameLib\GameShutDown.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InternalGameLib\InternalGameLibHandlers.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp">
@@ -111,6 +111,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameShutDown.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\View.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

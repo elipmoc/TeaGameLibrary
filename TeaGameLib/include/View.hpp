@@ -1,3 +1,9 @@
 #pragma once
 
-#include "Window/App/InternalGameLib/DrawPrimitive.hpp"
+#include "InternalGameLib/InternalGameLibHandlers.hpp"
+
+namespace teaGameLib {
+	struct View {
+		static void DrawBall(InternalGameLibHandlersPtr&, const int x, const int y, const int thickness);
+	};
+}

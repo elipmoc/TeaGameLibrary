@@ -179,13 +179,13 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Window\App\GameStates\KeyCode.hpp" />
     <ClInclude Include="include\Window\App\GameStates\KeyStates.hpp" />
     <ClInclude Include="include\Window\App\InitData.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\DrawPrimitive.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\DrawService.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\FpsWaitTicks.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\GameInitializer.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\GameShutDown.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\InternalGameLib.hpp" />
-    <ClInclude Include="include\Window\App\InternalGameLib\InternalGameLibHandlers.hpp" />
+    <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp" />
+    <ClInclude Include="include\InternalGameLib\DrawService.hpp" />
+    <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp" />
+    <ClInclude Include="include\InternalGameLib\GameInitializer.hpp" />
+    <ClInclude Include="include\InternalGameLib\GameShutDown.hpp" />
+    <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp" />
+    <ClInclude Include="include\InternalGameLib\InternalGameLibHandlers.hpp" />
     <ClInclude Include="include\Window\App\ProcessInput.hpp" />
     <ClInclude Include="include\Window\App\UpdateData.hpp" />
     <ClInclude Include="include\GameWorld.hpp" />
@@ -200,6 +200,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameInitializer.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameLib.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameShutDown.cpp" />
+    <ClCompile Include="src\View.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
