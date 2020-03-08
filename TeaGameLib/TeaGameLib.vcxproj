@@ -166,10 +166,41 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\test.hpp" />
+    <ClInclude Include="include\App.hpp" />
+    <ClInclude Include="include\App\Actor.hpp" />
+    <ClInclude Include="include\App\Effect.hpp" />
+    <ClInclude Include="include\App\EffectHandler.hpp" />
+    <ClInclude Include="include\App\EffectMsgQueue.hpp" />
+    <ClInclude Include="include\App\EffectMsgQueueFactory\CreateCommonEffectMsgQueue.hpp" />
+    <ClInclude Include="include\App\EffectParams.hpp" />
+    <ClInclude Include="include\App\GameStates.hpp" />
+    <ClInclude Include="include\App\GameStates\EventStates.hpp" />
+    <ClInclude Include="include\App\GameStates\KeyCode.hpp" />
+    <ClInclude Include="include\App\GameStates\KeyStates.hpp" />
+    <ClInclude Include="include\App\InitData.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\DrawPrimitive.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\DrawService.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\FpsWaitTicks.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\GameInitializer.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\GameShutDown.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\InternalGameLib.hpp" />
+    <ClInclude Include="include\App\InternalGameLib\InternalGameLibHandlers.hpp" />
+    <ClInclude Include="include\App\ProcessInput.hpp" />
+    <ClInclude Include="include\App\UpdateData.hpp" />
+    <ClInclude Include="include\CmdBuilder.hpp" />
+    <ClInclude Include="include\CmdImpls\EndGameCmd.hpp" />
+    <ClInclude Include="include\CmdImpls\IdCmd.hpp" />
+    <ClInclude Include="include\SubImpls\KeyInputEventSub.hpp" />
+    <ClInclude Include="include\SubImpls\QuitEventSub.hpp" />
+    <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\test.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawService.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLFpsWaitTicks.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameInitializer.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameLib.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameShutDown.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
