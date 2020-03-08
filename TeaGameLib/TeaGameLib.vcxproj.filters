@@ -60,9 +60,6 @@
     <ClInclude Include="include\Window\App\GameStates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\InitData.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\ProcessInput.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -91,6 +88,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window\App\WindowData.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

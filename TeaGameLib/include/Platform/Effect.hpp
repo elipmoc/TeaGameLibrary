@@ -13,8 +13,8 @@ namespace teaGameLib {
 	private:
 		const RunFunc runFunc;
 	public:
-		Effect(RunFunc runFunc) :runFunc(runFunc) {}
-		Effect() :runFunc([](EffectParams<Msg> _) {}) {}
+		constexpr Effect(RunFunc runFunc) :runFunc(runFunc) {}
+		constexpr Effect() :runFunc([](EffectParams<Msg> _) {}) {}
 
 		void InvokeRunFunc(EffectParams<Msg> effectParams) const { runFunc(effectParams); };
 

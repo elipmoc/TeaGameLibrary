@@ -19,9 +19,7 @@ int main(int , char** )
 
 	//Init関数
 	const auto init = [&initModel]() {
-		return tea::InitData{
-			std::move(initModel)
-		};
+		return std::move(initModel);
 	};
 
 	//Update関数

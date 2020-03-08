@@ -178,7 +178,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Window\App\GameStates\EventStates.hpp" />
     <ClInclude Include="include\Window\App\GameStates\KeyCode.hpp" />
     <ClInclude Include="include\Window\App\GameStates\KeyStates.hpp" />
-    <ClInclude Include="include\Window\App\InitData.hpp" />
+    <ClInclude Include="include\Window\App\WindowData.hpp" />
     <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp" />
     <ClInclude Include="include\InternalGameLib\DrawService.hpp" />
     <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp" />
