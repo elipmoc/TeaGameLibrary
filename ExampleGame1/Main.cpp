@@ -2,7 +2,7 @@
 #include "TeaGameLib/GameWorld.hpp"
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
-#include "TeaGameLib/Window/App/InternalGameLib/DrawPrimitive.hpp"
+#include "TeaGameLib/View.hpp"
 
 namespace tea = teaGameLib;
 
