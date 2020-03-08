@@ -166,6 +166,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Math\Vector2D.hpp" />
     <ClInclude Include="include\View.hpp" />
     <ClInclude Include="include\Window\App.hpp" />
     <ClInclude Include="include\Window\App\Actor.hpp" />

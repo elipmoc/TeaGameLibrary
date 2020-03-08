@@ -3,13 +3,14 @@
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/View.hpp"
+#include "TeaGameLib/Math/Vector2D.hpp"
 
 namespace tea = teaGameLib;
 
 int main(int , char** )
 {
 	//Model
-	using Model = struct { int x; int y; };
+	using Model = tea::math::Vector2D<int>;
 
 	//Msg
 	using Msg = std::string;
