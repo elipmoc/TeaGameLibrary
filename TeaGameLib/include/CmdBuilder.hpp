@@ -20,10 +20,5 @@ namespace teaGameLib {
         static Cmd<Msg> EndGame() {
             return Cmd<Msg>(EndGameCmd<Msg>{});
         }
-
-        template<typename Msg>
-        static Cmd<Msg> QuitEvent(Msg msg) {
-            return Cmd<Msg>(QuitEventSub<Msg>{msg});
-        }
     };
 }

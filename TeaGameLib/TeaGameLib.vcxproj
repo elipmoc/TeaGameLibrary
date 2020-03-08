@@ -193,6 +193,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\SubImpls\KeyInputEventSub.hpp" />
     <ClInclude Include="include\SubImpls\QuitEventSub.hpp" />
+    <ClInclude Include="include\WindowEvent.hpp" />
     <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp" />
   </ItemGroup>
   <ItemGroup>
