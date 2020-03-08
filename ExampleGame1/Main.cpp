@@ -20,8 +20,7 @@ int main(int , char** )
 	//Init関数
 	const auto init = [&initModel]() {
 		return tea::InitData{
-			std::move(initModel),
-			tea::WindowData{"TestWindow",100,100,1024,768}
+			std::move(initModel)
 		};
 	};
 
@@ -74,7 +73,9 @@ int main(int , char** )
 
 	//アプリケーションスタート
 	const auto app = tea::App{
-		tea::Actor{init,update,subscription,view},Msg{"Update"}
+		tea::Actor{init,update,subscription,view},
+		Msg{"Update"},
+		tea::WindowData{"TestWindow",100,100,1024,768}
 	};
 
 	return 0;

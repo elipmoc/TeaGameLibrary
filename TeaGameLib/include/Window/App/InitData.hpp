@@ -15,9 +15,8 @@ namespace teaGameLib {
 	template<typename Model>
 	struct InitData {
 		Model model;
-		const WindowData windowData;
-		InitData(Model&& model, WindowData windowData) :model(std::move(model)), windowData(windowData) {};
-		InitData(const InitData& initData) :model(std::move(initData.model)), windowData(initData.windowData) {};
+		InitData(Model&& model) :model(std::move(model)) {};
+		InitData(const InitData& initData) :model(std::move(initData.model)) {};
 		InitData(InitData&&) = delete;
 	};
 }

@@ -17,7 +17,7 @@ namespace teaGameLib {
 		using OptMsg = typename Cmd<Msg>::OptMsg;
 		using CustomUpdateData = UpdateData<Model, Msg>;
 
-		App(StartActor startActor, Msg updateMsg)
+		App(StartActor startActor, Msg updateMsg,WindowData windowData)
 		{
 			std::queue<Msg> queue;
 			EffectHandler effectHandler{ GameStates{} };
@@ -25,7 +25,7 @@ namespace teaGameLib {
 			int ticksCount = 0;
 			InitData<Model> initData = startActor.InvokeInitFunc();
 			Model&& model = std::move(initData.model);
-			std::optional<InternalGameLibHandlersPtr> internalGameLibHandlers = GameInitializer::Init(initData.windowData);
+			std::optional<InternalGameLibHandlersPtr> internalGameLibHandlers = GameInitializer::Init(windowData);
 			if (internalGameLibHandlers.has_value()) {
 				while (effectParams.effectHandler.GetIsRunning()) {
 					effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
