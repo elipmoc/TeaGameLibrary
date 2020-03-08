@@ -96,6 +96,9 @@
     <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="include\Input.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp">

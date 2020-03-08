@@ -1,5 +1,6 @@
 #include "TeaGameLib/App.hpp"
 #include "TeaGameLib/CmdBuilder.hpp"
+#include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/App/InternalGameLib/DrawPrimitive.hpp"
 
 namespace tea = teaGameLib;
@@ -57,10 +58,10 @@ int main(int , char** )
 	//Subscription関数
 	const auto subscription = [](const Model& model) {
 		return tea::Cmd<Msg>::Batch(
-			tea::CmdBuilder::KeyInputEvent(tea::KeyCode::KEY_D, Msg{ "RightMove" }),
-			tea::CmdBuilder::KeyInputEvent(tea::KeyCode::KEY_A, Msg{ "LeftMove" }),
-			tea::CmdBuilder::KeyInputEvent(tea::KeyCode::KEY_W, Msg{ "UpMove" }),
-			tea::CmdBuilder::KeyInputEvent(tea::KeyCode::KEY_S, Msg{ "DownMove" }),
+			tea::Input::KeyInput(tea::KeyCode::KEY_D, Msg{ "RightMove" }),
+			tea::Input::KeyInput(tea::KeyCode::KEY_A, Msg{ "LeftMove" }),
+			tea::Input::KeyInput(tea::KeyCode::KEY_W, Msg{ "UpMove" }),
+			tea::Input::KeyInput(tea::KeyCode::KEY_S, Msg{ "DownMove" }),
 			tea::CmdBuilder::QuitEvent(Msg{ "QuitEvent" })
 		);
 	};

@@ -25,10 +25,5 @@ namespace teaGameLib {
         static Cmd<Msg> QuitEvent(Msg msg) {
             return Cmd<Msg>(QuitEventSub<Msg>{msg});
         }
-
-        template<typename Msg>
-        static Cmd<Msg> KeyInputEvent(const KeyCode keyCode, Msg msg) {
-            return Cmd<Msg>(KeyInputEventSub<Msg>{keyCode, msg});
-        }
     };
 }
