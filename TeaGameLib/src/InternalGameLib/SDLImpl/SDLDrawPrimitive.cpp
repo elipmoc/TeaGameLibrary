@@ -4,9 +4,10 @@
 
 namespace teaGameLib {
 
-	void DrawSquare(InternalGameLibHandlersPtr& sdlHandlers, const int x, const int y, const int length)
+	void DrawSquare(InternalGameLibHandlersPtr& sdlHandlers, const int x, const int y, const int length, const Color& color)
 	{
-		SDL_SetRenderDrawColor(sdlHandlers->sdlRendererPtr, 0, 255, 255, 255);
+		const auto [r, g, b, a] = color;
+		SDL_SetRenderDrawColor(sdlHandlers->sdlRendererPtr, r, g, b, a);
 		SDL_Rect ball{
 			x - length / 2,
 			y - length / 2,

@@ -70,7 +70,7 @@ int main(int , char** )
 
 	//View関数
 	const auto view = [](const Model& model, tea::View& view) {
-		view.DrawSquare(model.x, model.y, 15);
+		view.DrawSquare(model.x, model.y, 15, tea::Color::Blue());
 	};
 
 	//アプリケーションオブジェクト作成
