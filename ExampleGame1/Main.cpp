@@ -42,9 +42,13 @@ int main(int , char** )
 	//Update関数
 	const auto update = [](Msg msg, Model model) {
 		return
+			//Msgの種類をパターンマッチで処理分岐する
 			match(msg)->tea::UpdateData<Model, Msg> {
+			//ゲーム終了する
 			case_expr(msg, MsgType::End) { std::move(model), tea::GameWorld::EndGame<Msg>() };
+			//毎フレーム呼ばれるアップデート処理(今は特に何もしない)
 			case_expr(msg, MsgType::Update) { std::move(model), Cmd::None() };
+			//移動
 			case_expr(msg, MsgType::AddPos) { model + msg * 5, Cmd::None() };
 		}match_end(msg);
 	};
