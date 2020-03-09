@@ -41,7 +41,7 @@ int main(int , char** )
 			case_expr(msg, MsgType::Update) { std::move(model), Cmd::None() };
 			//移動
 			case_expr(msg, MsgType::AddPos) { model + msg * 5, Cmd::None() };
-		}match_end(msg);
+		}match_end;
 	};
 
 	//Subscription関数
