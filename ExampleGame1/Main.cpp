@@ -4,16 +4,28 @@
 #include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/View.hpp"
 #include "TeaGameLib/Math/Vector2D.hpp"
+#include "TeaGameLib/Variant.hpp"
 
 namespace tea = teaGameLib;
+
+template<typename T>
+using Vector2D = tea::math::Vector2D<T>;
+
+struct MsgType {
+	struct Update {};
+	struct End {};
+	using AddPos = Vector2D<int>;
+};
+
+using Pos = Vector2D<int>;
 
 int main(int , char** )
 {
 	//Model
-	using Model = tea::math::Vector2D<int>;
+	using Model = Pos;
 
 	//Msg
-	using Msg = std::string;
+	using Msg = tea::Variant<MsgType::AddPos, MsgType::Update, MsgType::End>;
 
 	//Cmd,Subの型省略
 	using Cmd = tea::Cmd<Msg>;
@@ -28,22 +40,13 @@ int main(int , char** )
 	};
 
 	//Update関数
-	const auto update = [](Msg msg, Model model)->tea::UpdateData<Model, Msg> {
-		//ゲーム終了をする
-		if (msg == "QuitEvent")
-			return { std::move(model),tea::GameWorld::EndGame<Msg>() };
-		//右に移動
-		if (msg == "RightMove")	model.x += 5;
-		//左に移動
-		if (msg == "LeftMove") model.x -= 5;
-		//上に移動
-		if (msg == "UpMove") model.y -= 5;
-		//下に移動
-		if (msg == "DownMove") model.y += 5;
-		//毎フレーム呼ばれるアップデート
-		if (msg == "Update"); //今は特に何もしない
-
-		return { std::move(model),Cmd::None() };
+	const auto update = [](Msg msg, Model model) {
+		return
+			match(msg)->tea::UpdateData<Model, Msg> {
+			case_expr(msg, MsgType::End) { std::move(model), tea::GameWorld::EndGame<Msg>() };
+			case_expr(msg, MsgType::Update) { std::move(model), Cmd::None() };
+			case_expr(msg, MsgType::AddPos) { model + msg * 5, Cmd::None() };
+		}match_end(msg);
 	};
 
 	//Subscription関数
@@ -53,12 +56,12 @@ int main(int , char** )
 
 		return Cmd::Batch(
 			//キー入力イベントがあったら各種メッセージを送る
-			Input::KeyInput(tea::KeyCode::KEY_D, Msg{ "RightMove" }),
-			Input::KeyInput(tea::KeyCode::KEY_A, Msg{ "LeftMove" }),
-			Input::KeyInput(tea::KeyCode::KEY_W, Msg{ "UpMove" }),
-			Input::KeyInput(tea::KeyCode::KEY_S, Msg{ "DownMove" }),
+			Input::KeyInput(tea::KeyCode::KEY_D, Msg{ MsgType::AddPos::Right() }),
+			Input::KeyInput(tea::KeyCode::KEY_A, Msg{ MsgType::AddPos::Left() }),
+			Input::KeyInput(tea::KeyCode::KEY_W, Msg{ MsgType::AddPos::Up() }),
+			Input::KeyInput(tea::KeyCode::KEY_S, Msg{ MsgType::AddPos::Down() }),
 			//Windowからの終了イベントがあった時、QuitEventメッセージを送る（バツボタンを押した時など)
-			WindowEvent::Quit(Msg{ "QuitEvent" })
+			WindowEvent::Quit(Msg{ MsgType::End{} })
 		);
 	};
 
@@ -73,7 +76,7 @@ int main(int , char** )
 	//アプリケーションスタート
 	app.Start(
 		tea::Actor{ init,update,subscription,view },
-		Msg{ "Update" }//毎フレーム一回呼ばれるのでその時のメッセージを設定
+		Msg{ MsgType::Update{} }//毎フレーム一回呼ばれるのでその時のメッセージを設定
 	);
 
 	return 0;
