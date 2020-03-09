@@ -3,9 +3,15 @@
 #include <tuple>
 
 #define match(x) teaGameLib::Visit(x,[&](auto&& x)
+#define match2(x1,x2) teaGameLib::Visit(x1,x2,[&](auto&& x1,auto&& x2)
 #define ret_match(x) return match(x)
+#define ret_match2(x1,x2) return match2(x1,x2)
 #define case(x,t) if constexpr (std::is_same_v<std::decay_t<decltype(x)>, t>)
 #define case_expr(x,t) case(x,t) return
+#define case2(x1,x2,t1,t2) \
+	if constexpr (std::is_same_v<std::decay_t<decltype(x1)>, t1> && \
+	std::is_same_v<std::decay_t<decltype(x2)>, t2>)
+#define case_expr2(x1,x2,t1,t2) case2(x1,x2,t1,t2) return
 #define else_expr else return
 #define match_end )
 
