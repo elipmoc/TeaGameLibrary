@@ -2,27 +2,22 @@
 #include "TeaGameLib/GameWorld.hpp"
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
-#include "TeaGameLib/View.hpp"
-#include "TeaGameLib/Math/Vector2D.hpp"
 #include "TeaGameLib/Variant.hpp"
 
 namespace tea = teaGameLib;
 
-template<typename T>
-using Vector2D = tea::math::Vector2D<T>;
+using Vector2DInt = tea::math::Vector2D<int>;
 
 struct MsgType {
 	struct Update {};
 	struct End {};
-	using AddPos = Vector2D<int>;
+	using AddPos = Vector2DInt;
 };
-
-using Pos = Vector2D<int>;
 
 int main(int , char** )
 {
 	//Model
-	using Model = Pos;
+	using Model = Vector2DInt;
 
 	//Msg
 	using Msg = tea::Variant<MsgType::AddPos, MsgType::Update, MsgType::End>;
@@ -31,12 +26,9 @@ int main(int , char** )
 	using Cmd = tea::Cmd<Msg>;
 	using Sub = tea::Sub<Msg>;
 
-	//モデル初期値
-	Model initModel{ 512,384 };
-
 	//Init関数
-	const auto init = [&initModel]() {
-		return std::move(initModel);
+	const auto init = []() {
+		return Model{ 512,384 };
 	};
 
 	//Update関数
@@ -55,16 +47,15 @@ int main(int , char** )
 	//Subscription関数
 	const auto subscription = [](const Model& model) {
 		using Input = tea::Input;
-		using WindowEvent = tea::WindowEvent;
 
-		return Cmd::Batch(
+		return Sub::Batch(
 			//キー入力イベントがあったら各種メッセージを送る
 			Input::KeyInput(tea::KeyCode::KEY_D, Msg{ MsgType::AddPos::Right() }),
 			Input::KeyInput(tea::KeyCode::KEY_A, Msg{ MsgType::AddPos::Left() }),
 			Input::KeyInput(tea::KeyCode::KEY_W, Msg{ MsgType::AddPos::Up() }),
 			Input::KeyInput(tea::KeyCode::KEY_S, Msg{ MsgType::AddPos::Down() }),
 			//Windowからの終了イベントがあった時、QuitEventメッセージを送る（バツボタンを押した時など)
-			WindowEvent::Quit(Msg{ MsgType::End{} })
+			tea::WindowEvent::Quit(Msg{ MsgType::End{} })
 		);
 	};
 
