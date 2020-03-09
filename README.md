@@ -1,6 +1,8 @@
 # TeaGameLibrary
 C++のThe Elm Architectureぽいゲームライブラリ。
+
 C++17とThe Elm Architectureを採用したモダンなゲームライブラリを実装していきます。
+
 将来の夢は石油王になることです。
 
 ## 推奨開発環境
