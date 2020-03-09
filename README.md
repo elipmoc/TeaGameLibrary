@@ -8,6 +8,9 @@ C++17とThe Elm Architectureを採用したモダンなゲームライブラリ�
 ## 推奨開発環境
 Visual Studio 2019でしか動くことを想定してません
 
+## ビルド方法
+リポジトリクローンしたら、Visual Studio 2019でslnファイル開いてビルドすれば多分イケる。
+
 ## Feature
 
 - [ ] CmdとSubにBindをサポート
