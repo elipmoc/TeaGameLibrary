@@ -2,7 +2,7 @@
 #include "InternalGameLib/Interface/DrawPrimitive.hpp"
 
 namespace teaGameLib {
-	void View::DrawBall(const int x, const int y, const int thickness) {
-		teaGameLib::DrawBall(internalGameLibHandlersPtr, x, y, thickness);
+	void View::DrawSquare(const int x, const int y, const int length) {
+		teaGameLib::DrawSquare(internalGameLibHandlersPtr, x, y, length);
 	}
 }
