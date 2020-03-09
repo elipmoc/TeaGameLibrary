@@ -96,6 +96,9 @@
     <ClInclude Include="include\Math\Vector2D.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="include\Variant.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp">
