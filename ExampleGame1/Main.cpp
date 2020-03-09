@@ -41,9 +41,8 @@ int main(int , char** )
 
 	//Update関数
 	const auto update = [](Msg msg, Model model) {
-		return
-			//Msgの種類をパターンマッチで処理分岐する
-			match(msg)->tea::UpdateData<Model, Msg> {
+		//Msgの種類をパターンマッチで処理分岐する
+		ret_match(msg)->tea::UpdateData<Model, Msg> {
 			//ゲーム終了する
 			case_expr(msg, MsgType::End) { std::move(model), tea::GameWorld::EndGame<Msg>() };
 			//毎フレーム呼ばれるアップデート処理(今は特に何もしない)
