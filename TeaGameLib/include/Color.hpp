@@ -1,12 +1,13 @@
 #pragma once
+#include <cstdint>
 
 namespace teaGameLib {
     class Color {
     public:
-        unsigned int r;
-        unsigned int g;
-        unsigned int b;
-        unsigned int a = 255;
+        std::uint8_t r;
+        std::uint8_t g;
+        std::uint8_t b;
+        std::uint8_t a = 255;
         static constexpr Color Black() { return { 0,0,0 }; };
         static constexpr Color White() { return { 255,255,255 }; };
         static constexpr Color Red() { return { 255,0,0 }; };
