@@ -36,7 +36,8 @@ namespace teaGameLib {
 			EffectHandler effectHandler{ GameStates{} };
 			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
-			auto model= startActor.InvokeInitFunc();
+			auto [model, initCmd] = startActor.InvokeInitFunc();
+			initCmd.InvokeRunFunc(effectParams);
 			while (effectParams.effectHandler.GetIsRunning()) {
 				effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);

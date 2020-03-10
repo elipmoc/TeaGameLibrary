@@ -5,7 +5,8 @@
 #include "TeaGameLib/Variant.hpp"
 
 namespace tea = teaGameLib;
-
+using GameWorld = tea::GameWorld;
+using Color = tea::Color;
 using Vector2DInt = tea::math::Vector2D<int>;
 
 struct MsgType {
@@ -27,8 +28,8 @@ int main(int , char** )
 	using Sub = tea::Sub<Msg>;
 
 	//Init関数
-	const auto init = []() {
-		return Model{ 512,384 };
+	const auto init = []() ->tea::UpdateData<Model, Msg> {
+		return { Model{ 512,384 } ,GameWorld::SetBackGroundColor<Msg>(Color::White()) };
 	};
 
 	//Update関数
@@ -36,7 +37,7 @@ int main(int , char** )
 		//Msgの種類をパターンマッチで処理分岐する
 		ret_match(msg)->tea::UpdateData<Model, Msg> {
 			//ゲーム終了する
-			case_expr(msg, MsgType::End) { std::move(model), tea::GameWorld::EndGame<Msg>() };
+			case_expr(msg, MsgType::End) { std::move(model), GameWorld::EndGame<Msg>() };
 			//毎フレーム呼ばれるアップデート処理(今は特に何もしない)
 			case_expr(msg, MsgType::Update) { std::move(model), Cmd::None() };
 			//移動
@@ -61,7 +62,7 @@ int main(int , char** )
 
 	//View関数
 	const auto view = [](const Model& model, tea::View& view) {
-		view.DrawSquare(model, 15, tea::Color::Blue());
+		view.DrawSquare(model, 15, Color::Blue());
 	};
 
 	//アプリケーションオブジェクト作成

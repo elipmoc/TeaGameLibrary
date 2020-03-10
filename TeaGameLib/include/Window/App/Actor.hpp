@@ -12,7 +12,7 @@ namespace teaGameLib {
 		const SubscriptionFunc subscriptionFunc;
 		const ViewFunc viewFunc;
 	public:
-		using Model = std::remove_reference_t<std::invoke_result_t<InitFunc>>;
+		using Model = std::remove_reference_t<decltype(std::invoke_result_t<InitFunc>::model)>;
 		using Msg = typename std::invoke_result_t<SubscriptionFunc, Model>::EffectMsg;
 
 		Actor(
@@ -26,7 +26,7 @@ namespace teaGameLib {
 			subscriptionFunc(subscriptionFunc),
 			viewFunc(viewFunc) {}
 
-		Model InvokeInitFunc()const { return initFunc(); }
+		UpdateData<Model,Msg> InvokeInitFunc()const { return initFunc(); }
 		UpdateData<Model, Msg> InvokeUpdateFunc(Msg msg, Model&& model)const { return updateFunc(msg, std::move(model)); }
 		void  InvokeViewFunc(const Model& model, View& view)const { viewFunc(model, view); }
 		Sub<Msg> InvokeSubscriptionFunc(const Model& model)const { return subscriptionFunc(model); }
