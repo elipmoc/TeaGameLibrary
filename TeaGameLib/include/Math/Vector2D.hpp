@@ -26,8 +26,20 @@ namespace teaGameLib::math {
 			return Zip(std::plus<T>{}, rhs);
 		}
 
+		constexpr Vector2D<T>& operator+=(const Vector2D<T>& rhs)noexcept {
+			x += rhs.x;
+			y += rhs.y;
+			return *this;
+		}
+
 		constexpr Vector2D<T> operator-(const Vector2D<T>& rhs)const noexcept {
 			return Zip(std::minus<T>{}, rhs);
+		}
+
+		constexpr Vector2D<T>& operator-=(const Vector2D<T>& rhs)noexcept {
+			x += rhs.x;
+			y += rhs.y;
+			return *this;
 		}
 
 		constexpr Vector2D<T> operator*(const T& rhs)const noexcept {
