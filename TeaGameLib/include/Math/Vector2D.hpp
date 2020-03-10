@@ -48,11 +48,11 @@ namespace teaGameLib::math {
 			y = tmp;
 		}
 
-		static constexpr Vector2D<T> Zero()noexcept { return {}; };
-		static constexpr Vector2D<T> Up()noexcept { return { 0,-1 }; };
-		static constexpr Vector2D<T> Down()noexcept { return { 0,1 }; };
-		static constexpr Vector2D<T> Left()noexcept { return { -1,0 }; };
-		static constexpr Vector2D<T> Right()noexcept { return { 1,0 }; };
+		static constexpr Vector2D<T> Zero()noexcept { return Vector2D<int>{}.StaticCast<T>(); };
+		static constexpr Vector2D<T> Up()noexcept { return Vector2D<int>{ 0, -1 }.StaticCast<T>(); };
+		static constexpr Vector2D<T> Down()noexcept { return Vector2D<int>{ 0, 1 }.StaticCast<T>(); };
+		static constexpr Vector2D<T> Left()noexcept { return Vector2D<int>{ -1, 0 }.StaticCast<T>(); };
+		static constexpr Vector2D<T> Right()noexcept { return Vector2D<int>{ 1, 0 }.StaticCast<T>(); };
 
 		constexpr auto LengthSq()const noexcept {
 			return x * x + y * y;
@@ -76,6 +76,11 @@ namespace teaGameLib::math {
 		constexpr auto Dot(const Vector2D<T>& rhs)
 		{
 			return (x * rhs.x + y * rhs.y);
+		}
+
+		template<typename U>
+		constexpr Vector2D<U> StaticCast() const noexcept {
+			return Map([](const auto& a) {return static_cast<U>(a); });
 		}
 	};
 }
