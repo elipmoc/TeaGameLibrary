@@ -12,5 +12,12 @@ namespace teaGameLib {
 				effectParams.effectHandler.EndGame();
 			} };
 		}
+
+		template<typename Msg>
+		static Cmd<Msg> SetBackGroundColor(const Color& color) {
+			return { [color](EffectParams<Msg> effectParams) {
+				effectParams.effectHandler.SetBackGroundColor(color);
+			} };
+		}
 	};
 }

@@ -47,7 +47,11 @@ namespace teaGameLib {
 					UpdateMsgQueue(queue, std::move(model), startActor, effectParams)
 				);
 
-				DrawService::Draw(internalGameLibHandlersPtr, [&]() {startActor.InvokeViewFunc(model, view); });
+				DrawService::Draw(
+					internalGameLibHandlersPtr,
+					effectHandler.GetBackGroundColor(),
+					[&]() {startActor.InvokeViewFunc(model, view); }
+				);
 			}
 			GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 		}

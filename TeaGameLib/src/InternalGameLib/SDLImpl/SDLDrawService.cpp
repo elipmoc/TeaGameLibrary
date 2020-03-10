@@ -8,14 +8,12 @@ namespace teaGameLib {
 	{
 		SDL_RenderPresent(sdlHandlers->sdlRendererPtr);
 	}
-	void DrawService::RenderClear(InternalGameLibHandlersPtr& sdlHandlers)
+	void DrawService::RenderClear(InternalGameLibHandlersPtr& sdlHandlers,const Color& color)
 	{
+		auto const [r, g, b, a] = color;
 		SDL_SetRenderDrawColor(
 			sdlHandlers->sdlRendererPtr,
-			0,		// R
-			0,		// G 
-			0,	    // B
-			255		// A
+			r, g, b, a
 		);
 
 		SDL_RenderClear(sdlHandlers->sdlRendererPtr);
