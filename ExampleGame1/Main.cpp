@@ -40,22 +40,23 @@ using Sub = tea::Sub<Msg>;
 //Init関数
 tea::UpdateData<Model, Msg> Init() {
 	return {
+		GameWorld::SetBackGroundColor<Msg>(Color::Blue()),
 		Model{
 			{{10,windowHeightHalf}},
 			{{windowWidthHalf,windowHeightHalf},{-200.0f,235.0f}}
-		} ,
-		GameWorld::SetBackGroundColor<Msg>(Color::Blue())
+		}
 	};
 };
 
 //paddleの座標更新
-void UpdatePaddle(Model::Paddle& paddle, MsgType::Update updateMsg) {
+Cmd UpdatePaddle(Model::Paddle& paddle, MsgType::Update updateMsg) {
 	paddle.pos.y += paddle.addY * updateMsg.deltaTime * 300.0f;
 	paddle.addY = 0;
 	paddle.pos.y = tea::Clamp<float>(
 		paddle.pos.y,
 		paddleHeightHalf + thickness,
 		windowHeight - paddleHeightHalf - thickness);
+	return Cmd::None();
 };
 
 //ballの更新
@@ -89,15 +90,17 @@ tea::UpdateData<Model, Msg> Update(Msg msg, Model model) {
 	//Msgの種類をパターンマッチで処理分岐する
 	ret_match(msg)->tea::UpdateData<Model, Msg> {
 		//ゲーム終了する
-		case_expr(msg, MsgType::End) { std::move(model), GameWorld::EndGame<Msg>() };
-		case(msg, MsgType::Update) {
-			UpdatePaddle(model.paddle, msg);
-			auto cmd = UpdateBall(model.ball, model.paddle.pos, msg);
-			return { std::move(model),cmd };
+		case_expr(msg, MsgType::End) { GameWorld::EndGame<Msg>(), std::move(model) };
+		case_expr(msg, MsgType::Update) {
+			Cmd::Batch(
+				UpdatePaddle(model.paddle, msg),
+				UpdateBall(model.ball, model.paddle.pos, msg)
+			),
+				std::move(model)
 		};
 		//paddleのキー入力での移動を溜めておく
 		case_expr(msg, MsgType::AddY) {
-			(model.paddle.addY += msg, std::move(model)), Cmd::None()
+			Cmd::None(), (model.paddle.addY += msg, std::move(model))
 		};
 	}match_end;
 };
