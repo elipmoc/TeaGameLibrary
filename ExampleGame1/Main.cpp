@@ -9,7 +9,7 @@ namespace tea = teaGameLib;
 using Vector2DInt = tea::math::Vector2D<int>;
 
 struct MsgType {
-	struct Update {};
+	struct Update { float deltaTime; };
 	struct End {};
 	using AddPos = Vector2DInt;
 };
@@ -70,7 +70,8 @@ int main(int , char** )
 	//アプリケーションスタート
 	app.Start(
 		tea::Actor{ init,update,subscription,view },
-		Msg{ MsgType::Update{} }//毎フレーム一回呼ばれるのでその時のメッセージを設定
+		//毎フレーム一回呼ばれるのでその時のメッセージを設定
+		[](float deltaTime) {return Msg{ MsgType::Update{deltaTime} }; }
 	);
 
 	return 0;

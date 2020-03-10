@@ -29,8 +29,9 @@ namespace teaGameLib {
 		}
 
 
-		template<typename StartActor, typename Msg>
-		void Start(StartActor startActor, Msg updateMsg) {
+		template<typename StartActor, typename UpdateMsgFunc>
+		void Start(StartActor startActor, UpdateMsgFunc updateMsgFunc) {
+			using Msg = std::invoke_result_t<UpdateMsgFunc, float>;
 			std::queue<Msg> queue;
 			EffectHandler effectHandler{ GameStates{} };
 			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
@@ -39,8 +40,8 @@ namespace teaGameLib {
 			while (effectParams.effectHandler.GetIsRunning()) {
 				effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
-				ticksCount = FpsWaitTicks(ticksCount);
-				effectParams.effectMsgQueue.InQueueMsg(updateMsg);
+				float deltaTime = FpsWaitTicks(ticksCount);
+				effectParams.effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
 
 				model = std::move(
 					UpdateMsgQueue(queue, std::move(model), startActor, effectParams)
