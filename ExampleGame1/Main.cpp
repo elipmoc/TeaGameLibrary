@@ -28,8 +28,8 @@ int main(int, char**)
 {
 	//Model
 	using Model = struct { 
-		struct { Vector2DFloat pos; float addY = 0.0f; } paddle;
-		struct { Vector2DFloat pos; Vector2DFloat addPos;} ball;
+		struct Paddle { Vector2DFloat pos; float addY = 0.0f; } paddle;
+		struct Ball{ Vector2DFloat pos; Vector2DFloat addPos;} ball;
 	};
 
 	//Msg
@@ -50,45 +50,52 @@ int main(int, char**)
 		};
 	};
 
+	//paddleの座標更新
+	const auto updatePaddle = [](Model::Paddle& paddle,MsgType::Update updateMsg) {
+		paddle.pos.y += paddle.addY * updateMsg.deltaTime * 300.0f;
+		paddle.addY = 0;
+		paddle.pos.y = tea::Clamp<float>(
+			paddle.pos.y,
+			paddleHeightHalf + thickness,
+			windowHeight - paddleHeightHalf - thickness);
+	};
+
+	//ballの更新
+	const auto updateBall= [](Model::Ball& ball,Vector2DFloat paddlePos, MsgType::Update updateMsg) {
+		//ballの座標更新
+		ball.pos += ball.addPos * updateMsg.deltaTime;
+		//ballの壁・paddleの判定処理
+		float diff = paddlePos.y - ball.pos.y;
+		diff = (diff > 0.0f) ? diff : -diff;
+		if (
+			diff <= paddleHeightHalf &&
+			ball.pos.x <= 25.0f && ball.pos.x >= 20.0f &&
+			ball.addPos.x < 0.0f
+			)
+			ball.addPos.x *= -1.0f;
+		else if (ball.pos.x <= 0.0f)
+			return GameWorld::EndGame<Msg>();
+
+		else if (ball.pos.x >= (windowWidth - thickness) && ball.addPos.x > 0.0f)
+			ball.addPos.x *= -1.0f;
+
+		if (ball.pos.y <= thickness && ball.addPos.y < 0.0f)
+			ball.addPos.y *= -1;
+		else if (ball.pos.y >= (windowHeight - thickness) && ball.addPos.y > 0.0f)
+			ball.addPos.y *= -1;
+		return Cmd::None();
+	};
+
 	//Update関数
-	const auto update = [](Msg msg, Model model) {
+	const auto update = [updatePaddle, updateBall](Msg msg, Model model) {
 		//Msgの種類をパターンマッチで処理分岐する
 		ret_match(msg)->tea::UpdateData<Model, Msg> {
 			//ゲーム終了する
 			case_expr(msg, MsgType::End) { std::move(model), GameWorld::EndGame<Msg>() };
 			case(msg, MsgType::Update) {
-				//paddleの座標更新
-				model.paddle.pos.y += model.paddle.addY * msg.deltaTime * 300.0f;
-				model.paddle.addY = 0;
-				model.paddle.pos.y = tea::Clamp<float>(
-					model.paddle.pos.y,
-					paddleHeightHalf + thickness,
-					windowHeight - paddleHeightHalf - thickness);
-
-				//ballの座標更新
-				model.ball.pos += model.ball.addPos * msg.deltaTime;
-
-				//ballの壁・paddleの判定処理
-				float diff = model.paddle.pos.y -model.ball.pos.y;
-				diff = (diff > 0.0f) ? diff : -diff;
-				if (
-					diff <= paddleHeightHalf &&
-					model.ball.pos.x <= 25.0f && model.ball.pos.x >= 20.0f &&
-					model.ball.addPos.x < 0.0f
-					)
-					model.ball.addPos.x *= -1.0f;
-				else if (model.ball.pos.x <= 0.0f)
-					return { std::move(model),GameWorld::EndGame<Msg>() };
-
-				else if (model.ball.pos.x >= (windowWidth - thickness) && model.ball.addPos.x > 0.0f)
-					model.ball.addPos.x *= -1.0f;
-
-				if (model.ball.pos.y <= thickness && model.ball.addPos.y < 0.0f)
-					model.ball.addPos.y *= -1;
-				else if (model.ball.pos.y >= (windowHeight - thickness) && model.ball.addPos.y > 0.0f)
-					model.ball.addPos.y *= -1;
-				return { std::move(model) , Cmd::None() };
-
+				updatePaddle(model.paddle, msg);
+				auto cmd = updateBall(model.ball, model.paddle.pos, msg);
+				return { std::move(model),cmd };
 			};
 			//paddleのキー入力での移動を溜めておく
 			case_expr(msg, MsgType::AddY) {
@@ -98,7 +105,7 @@ int main(int, char**)
 	};
 
 	//Subscription関数
-	const auto subscription = [](const Model& model) {
+	const auto subscription = [](const Model&) {
 		using Input = tea::Input;
 
 		return Sub::Batch(
