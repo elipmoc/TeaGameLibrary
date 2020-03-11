@@ -92,6 +92,7 @@
       <AdditionalIncludeDirectories>include;$(SolutionDir)\External\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +107,9 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     </PreBuildEvent>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)External\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2-staticd.lib;SDL2maind.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2-static.lib;SDL2main.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib;SDL2_image.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -131,6 +134,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>include;$(SolutionDir)\External\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +151,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     </PreBuildEvent>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)External\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2-static.lib;SDL2main.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2-static.lib;SDL2main.lib;opengl32.lib;version.lib;winmm.lib;imm32.lib;setupapi.lib;SDL2_image.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,7 +173,10 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
   <ItemGroup>
     <ClInclude Include="include\Algorithm.hpp" />
     <ClInclude Include="include\Color.hpp" />
+    <ClInclude Include="include\InternalGameLib\Resource\TextureResource.hpp" />
     <ClInclude Include="include\Math\Vector2D.hpp" />
+    <ClInclude Include="include\InternalGameLib\Resource\ResourceLoader.hpp" />
+    <ClInclude Include="include\ResourceManager.hpp" />
     <ClInclude Include="include\Variant.hpp" />
     <ClInclude Include="include\View.hpp" />
     <ClInclude Include="include\Window\App.hpp" />
@@ -196,9 +203,12 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\GameWorld.hpp" />
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\WindowEvent.hpp" />
+    <ClInclude Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResourceImpl.hpp" />
     <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InternalGameLib\SDLImpl\Resource\SDLResourceLoader.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResource.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawService.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLFpsWaitTicks.cpp" />
