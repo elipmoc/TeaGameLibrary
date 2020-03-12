@@ -8,14 +8,14 @@
 namespace teaGameLib {
 	
 	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
-	EffectHandler* GameWorld::effectHandler;
+	gameWorld::GameWorldData* GameWorld::gameWorldData;
 	input::KeyStates Input::keyStates;
 	EventStates WindowEvent::eventStates;
 
 	App::App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)
 		:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }) {
 		ResourceManager::Init(internalGameLibHandlersPtr);
-		GameWorld::Init(effectHandler);
+		GameWorld::Init(gameWorldData);
 
 	}
 

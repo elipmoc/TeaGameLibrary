@@ -7,13 +7,13 @@
 #include "../InternalGameLib/DrawService.hpp"
 #include "App/WindowData.hpp"
 #include "App/EffectMsgQueueFactory/CreateCommonEffectMsgQueue.hpp"
-#include "App/EffectHandler.hpp"
+#include "../GameWorld/GameWorldData.hpp"
 
 namespace teaGameLib {
 	class App {
 		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
 		View view;
-		EffectHandler effectHandler;
+		gameWorld::GameWorldData gameWorldData;
 
 		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr);
 
@@ -29,7 +29,7 @@ namespace teaGameLib {
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();
 			initCmd.InvokeRunFunc(effectMsgQueue);
-			while (effectHandler.GetIsRunning()) {
+			while (gameWorldData.GetIsRunning()) {
 				GameStates gameStates = ProcessInput();
 				Input::Init(gameStates.keyStates);
 				WindowEvent::Init(gameStates.eventStates);
@@ -43,7 +43,7 @@ namespace teaGameLib {
 
 				DrawService::Draw(
 					internalGameLibHandlersPtr,
-					effectHandler.GetBackGroundColor(),
+					gameWorldData.GetBackGroundColor(),
 					[&]() {startActor.InvokeViewFunc(model, view); }
 				);
 			}

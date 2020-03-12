@@ -42,9 +42,6 @@
     <ClInclude Include="include\Window\App\Actor.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\EffectHandler.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\EffectMsgQueue.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="include\Input\KeyStates.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameWorld\GameWorldData.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

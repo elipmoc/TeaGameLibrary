@@ -184,7 +184,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Window\App.hpp" />
     <ClInclude Include="include\Window\App\Actor.hpp" />
     <ClInclude Include="include\Platform\Effect.hpp" />
-    <ClInclude Include="include\Window\App\EffectHandler.hpp" />
+    <ClInclude Include="include\GameWorld\GameWorldData.hpp" />
     <ClInclude Include="include\Window\App\EffectMsgQueue.hpp" />
     <ClInclude Include="include\Window\App\EffectMsgQueueFactory\CreateCommonEffectMsgQueue.hpp" />
     <ClInclude Include="include\Window\App\GameStates.hpp" />
