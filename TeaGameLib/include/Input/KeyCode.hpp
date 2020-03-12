@@ -1,6 +1,6 @@
 #pragma once
 
-namespace teaGameLib {
+namespace teaGameLib::input {
 
     enum class KeyCode
     {

@@ -9,7 +9,7 @@ namespace teaGameLib {
 	
 	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
 	EffectHandler* GameWorld::effectHandler;
-	KeyStates Input::keyStates;
+	input::KeyStates Input::keyStates;
 	EventStates WindowEvent::eventStates;
 
 	App::App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)

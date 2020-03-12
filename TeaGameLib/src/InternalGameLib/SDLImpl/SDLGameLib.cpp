@@ -2,8 +2,8 @@
 #include "SDL/SDL.h"
 
 namespace teaGameLib {
-	KeyStates GetKeyStates() {
-		return KeyStates{ SDL_GetKeyboardState(NULL) };
+	input::KeyStates GetKeyStates() {
+		return input::KeyStates{ SDL_GetKeyboardState(NULL) };
 	}
 
 	EventStates GetEventStates() {

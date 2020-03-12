@@ -109,9 +109,9 @@ tea::UpdateData<Model, Msg> Update(Msg msg, Model model) {
 Sub Subscription(const Model&) {
 	return Sub::Batch(
 		//キー入力イベントがあったら各種メッセージを送る
-		tea::Input::KeyInput(tea::KeyCode::KEY_W, Msg{ MsgType::AddY{-1.0f} }),
-		tea::Input::KeyInput(tea::KeyCode::KEY_S, Msg{ MsgType::AddY{1.0f} }),
-		tea::Input::KeyInput(tea::KeyCode::KEY_ESCAPE, Msg{ MsgType::End{} }),
+		tea::Input::KeyInput(tea::input::KeyCode::KEY_W, Msg{ MsgType::AddY{-1.0f} }),
+		tea::Input::KeyInput(tea::input::KeyCode::KEY_S, Msg{ MsgType::AddY{1.0f} }),
+		tea::Input::KeyInput(tea::input::KeyCode::KEY_ESCAPE, Msg{ MsgType::End{} }),
 		//Windowからの終了イベントがあった時、QuitEventメッセージを送る（バツボタンを押した時など)
 		tea::WindowEvent::Quit(Msg{ MsgType::End{} })
 	);

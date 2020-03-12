@@ -173,6 +173,8 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
   <ItemGroup>
     <ClInclude Include="include\Algorithm.hpp" />
     <ClInclude Include="include\Color.hpp" />
+    <ClInclude Include="include\Input\KeyCode.hpp" />
+    <ClInclude Include="include\Input\KeyStates.hpp" />
     <ClInclude Include="include\InternalGameLib\Resource\TextureResource.hpp" />
     <ClInclude Include="include\Math\Vector2D.hpp" />
     <ClInclude Include="include\InternalGameLib\Resource\ResourceLoader.hpp" />
@@ -187,8 +189,6 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Window\App\EffectMsgQueueFactory\CreateCommonEffectMsgQueue.hpp" />
     <ClInclude Include="include\Window\App\GameStates.hpp" />
     <ClInclude Include="include\Window\App\GameStates\EventStates.hpp" />
-    <ClInclude Include="include\Window\App\GameStates\KeyCode.hpp" />
-    <ClInclude Include="include\Window\App\GameStates\KeyStates.hpp" />
     <ClInclude Include="include\Window\App\WindowData.hpp" />
     <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp" />
     <ClInclude Include="include\InternalGameLib\DrawService.hpp" />

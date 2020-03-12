@@ -2,13 +2,13 @@
 
 #include "Platform/Effect.hpp"
 #include "Window/App/EffectMsgQueue.hpp"
-#include "Window/App/GameStates/KeyStates.hpp"
+#include "Input/KeyStates.hpp"
 
 namespace teaGameLib {
 	class Input {
-		static KeyStates keyStates;
+		static input::KeyStates keyStates;
 
-		static void Init(const KeyStates& _keyStates) {
+		static void Init(const input::KeyStates& _keyStates) {
 			keyStates = _keyStates;
 		}
 
@@ -17,7 +17,7 @@ namespace teaGameLib {
 	public:
 
 		template<typename Msg>
-		static Sub<Msg> KeyInput(KeyCode keyCode, Msg msg) {
+		static Sub<Msg> KeyInput(input::KeyCode keyCode, Msg msg) {
 			return { [keyCode,msg](EffectMsgQueue<Msg> effectMsgQueue) {
 					if (keyStates.GetKeyInput(keyCode))
 						effectMsgQueue.InQueueMsg(msg);

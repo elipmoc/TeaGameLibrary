@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "KeyCode.hpp"
 
-namespace teaGameLib {
+namespace teaGameLib::input {
 
     class KeyStates {
         const std::uint8_t* state;

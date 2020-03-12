@@ -2,7 +2,6 @@
 
 #include "Platform/Effect.hpp"
 #include "Window/App/EffectMsgQueue.hpp"
-#include "Window/App/GameStates/KeyStates.hpp"
 
 namespace teaGameLib {
 	class GameWorld {
