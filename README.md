@@ -15,7 +15,7 @@ Visual Studio 2019でしか動くことを想定してません
 
 - [ ] CmdとSubにBindをサポート
 - [x] Vector2Dのサポート
-- [ ] Sprite表示のサポート
+- [x] Sprite表示のサポート
 - [ ] 簡易的な物理のサポート
 - [ ] constexprのサポート
 - [ ] templateの型制約のサポート
