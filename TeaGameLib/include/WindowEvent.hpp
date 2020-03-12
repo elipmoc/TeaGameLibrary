@@ -4,12 +4,18 @@
 #include "Window/App/EffectParams.hpp"
 
 namespace teaGameLib {
-	struct WindowEvent {
+	class WindowEvent {
+		static EventStates eventStates;
+	public:
+		static void Init(const EventStates& _eventStates) {
+			eventStates = _eventStates;
+		}
+
 		template<typename Msg>
 		static Sub<Msg> Quit(Msg msg) {
 			return{
 				[msg](EffectParams<Msg> effectParams) {
-					if (effectParams.effectHandler.GetGameStates().eventStates.isQuit)
+					if (eventStates.isQuit)
 						effectParams.effectMsgQueue.InQueueMsg(msg);
 				}
 			};
