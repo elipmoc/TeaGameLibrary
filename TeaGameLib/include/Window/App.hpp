@@ -4,6 +4,7 @@
 #include "App/EffectParams.hpp"
 #include "../View.hpp"
 #include "../ResourceManager.hpp"
+#include "../Input.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/GameInitializer.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
@@ -12,6 +13,7 @@
 namespace teaGameLib {
 
 	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
+	KeyStates Input::keyStates;
 
 	struct App {
 	private:
@@ -46,6 +48,7 @@ namespace teaGameLib {
 			initCmd.InvokeRunFunc(effectParams);
 			while (effectParams.effectHandler.GetIsRunning()) {
 				effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
+				Input::Init(effectParams.effectHandler.GetGameStates().keyStates);
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
 				float deltaTime = FpsWaitTicks(ticksCount);
 				effectParams.effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
