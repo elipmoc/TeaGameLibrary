@@ -6,7 +6,6 @@
 namespace teaGameLib {
 	template<typename Msg>
 	struct EffectParams {
-		EffectHandler& effectHandler;
 		EffectMsgQueue<Msg> effectMsgQueue;	
 	};
 }

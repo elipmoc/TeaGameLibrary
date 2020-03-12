@@ -47,11 +47,11 @@ namespace teaGameLib {
 			std::queue<Msg> queue;
 			EffectHandler effectHandler{ };
 			GameWorld::Init(effectHandler);
-			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
+			EffectParams<Msg> effectParams{ CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();
 			initCmd.InvokeRunFunc(effectParams);
-			while (effectParams.effectHandler.GetIsRunning()) {
+			while (effectHandler.GetIsRunning()) {
 				GameStates gameStates = ProcessInput();
 				Input::Init(gameStates.keyStates);
 				WindowEvent::Init(gameStates.eventStates);
