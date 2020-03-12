@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeaGameLib", "TeaGameLib\Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExampleGame1", "ExampleGame1\ExampleGame1.vcxproj", "{EE5410EA-AFC7-488E-B007-75EBB3B955FD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExampleGame2", "ExampleGame2\ExampleGame2.vcxproj", "{54C248AE-E991-4190-A49B-CDC7C70179E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{EE5410EA-AFC7-488E-B007-75EBB3B955FD}.Release|x64.Build.0 = Release|x64
 		{EE5410EA-AFC7-488E-B007-75EBB3B955FD}.Release|x86.ActiveCfg = Release|Win32
 		{EE5410EA-AFC7-488E-B007-75EBB3B955FD}.Release|x86.Build.0 = Release|Win32
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Debug|x64.ActiveCfg = Debug|x64
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Debug|x64.Build.0 = Debug|x64
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Debug|x86.ActiveCfg = Debug|Win32
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Debug|x86.Build.0 = Debug|Win32
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Release|x64.ActiveCfg = Release|x64
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Release|x64.Build.0 = Release|x64
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Release|x86.ActiveCfg = Release|Win32
+		{54C248AE-E991-4190-A49B-CDC7C70179E1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
