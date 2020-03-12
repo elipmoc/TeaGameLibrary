@@ -203,6 +203,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\GameWorld.hpp" />
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\WindowEvent.hpp" />
+    <ClInclude Include="src\InternalGameLib\Interface\DrawSprite.hpp" />
     <ClInclude Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResourceImpl.hpp" />
     <ClInclude Include="src\InternalGameLib\SDLImpl\SDLHandlers.hpp" />
   </ItemGroup>
@@ -211,6 +212,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClCompile Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResource.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawService.cpp" />
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawSprite.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLFpsWaitTicks.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameInitializer.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameLib.cpp" />

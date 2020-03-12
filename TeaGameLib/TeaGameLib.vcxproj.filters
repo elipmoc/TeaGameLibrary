@@ -117,6 +117,9 @@
     <ClInclude Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResourceImpl.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\InternalGameLib\Interface\DrawSprite.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawPrimitive.cpp">
@@ -144,6 +147,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\InternalGameLib\SDLImpl\Resource\SDLTextureResource.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InternalGameLib\SDLImpl\SDLDrawSprite.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
