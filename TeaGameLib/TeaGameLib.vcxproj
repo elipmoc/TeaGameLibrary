@@ -194,7 +194,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\InternalGameLib\DrawService.hpp" />
     <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp" />
     <ClInclude Include="src\InternalGameLib\Interface\GameInitializer.hpp" />
-    <ClInclude Include="include\InternalGameLib\GameShutDown.hpp" />
+    <ClInclude Include="src\InternalGameLib\Interface\GameShutDown.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLibHandlers.hpp" />
     <ClInclude Include="include\Window\App\ProcessInput.hpp" />

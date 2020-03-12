@@ -2,6 +2,7 @@
 #include "View.hpp"
 #include "GameWorld.hpp"
 #include "ResourceManager.hpp"
+#include "../InternalGameLib/Interface/GameShutDown.hpp"
 #include "../InternalGameLib/Interface/GameInitializer.hpp"
 
 namespace teaGameLib {
@@ -24,5 +25,9 @@ namespace teaGameLib {
 			throw "";
 		}
 		return App{ internalGameLibHandlers.value() };
+	}
+	App::~App()
+	{
+		GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 	}
 }

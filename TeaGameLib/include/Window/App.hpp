@@ -4,7 +4,6 @@
 #include "../Input.hpp"
 #include "../WindowEvent.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
-#include "../InternalGameLib/GameShutDown.hpp"
 #include "../InternalGameLib/DrawService.hpp"
 #include "App/WindowData.hpp"
 #include "App/EffectMsgQueueFactory/CreateCommonEffectMsgQueue.hpp"
@@ -48,8 +47,9 @@ namespace teaGameLib {
 					[&]() {startActor.InvokeViewFunc(model, view); }
 				);
 			}
-			GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 		}
+
+		~App();
 
 	private:
 

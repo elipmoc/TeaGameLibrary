@@ -72,9 +72,6 @@
     <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\InternalGameLib\GameShutDown.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\InternalGameLib\Interface\GameInitializer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InternalGameLib\Interface\GameShutDown.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

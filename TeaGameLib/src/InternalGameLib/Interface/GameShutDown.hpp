@@ -1,5 +1,5 @@
 #pragma once
-#include "InternalGameLibHandlers.hpp"
+#include "InternalGameLib/InternalGameLibHandlers.hpp"
 
 namespace teaGameLib {
 
