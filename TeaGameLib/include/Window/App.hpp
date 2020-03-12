@@ -3,6 +3,7 @@
 #include"App/ProcessInput.hpp"
 #include "App/EffectParams.hpp"
 #include "../View.hpp"
+#include "../ResourceManager.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/GameInitializer.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
@@ -10,13 +11,18 @@
 
 namespace teaGameLib {
 
+	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
+
 	struct App {
 	private:
 
 		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
 		View view;
+
 		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)
-			:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }) {}
+			:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }){
+			ResourceManager::Init(internalGameLibHandlersPtr);
+		}
 
 	public:
 

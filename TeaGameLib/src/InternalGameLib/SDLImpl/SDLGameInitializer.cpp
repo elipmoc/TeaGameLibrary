@@ -1,6 +1,7 @@
 #include "InternalGameLib/GameInitializer.hpp"
 #include "SDLHandlers.hpp"
 #include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
 
 namespace teaGameLib {
 
@@ -50,6 +51,11 @@ namespace teaGameLib {
 	std::optional<InternalGameLibHandlersPtr> GameInitializer::Init(const WindowData& windowData)
 	{
 		if (!InitSDL())return std::nullopt;
+		if (IMG_Init(IMG_INIT_PNG) == 0)
+		{
+			SDL_Log("Unable to initialize SDL_image: %s", SDL_GetError());
+			return std::nullopt;
+		}
 		auto sdlWindowPtr = InitSDLWindow(windowData);
 		if (!sdlWindowPtr)return std::nullopt;
 		auto sdlRendererPtr = InitSDLRenderer(sdlWindowPtr);
