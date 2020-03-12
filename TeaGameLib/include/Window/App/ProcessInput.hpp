@@ -3,7 +3,7 @@
 #include "../../InternalGameLib/InternalGameLib.hpp"
 
 namespace teaGameLib {
-	GameStates ProcessInput() {
+	inline GameStates ProcessInput() {
 		return GameStates{
 			GetEventStates(),
 			GetKeyStates()

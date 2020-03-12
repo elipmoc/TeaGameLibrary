@@ -194,7 +194,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="src\InternalGameLib\Interface\DrawPrimitive.hpp" />
     <ClInclude Include="include\InternalGameLib\DrawService.hpp" />
     <ClInclude Include="include\InternalGameLib\FpsWaitTicks.hpp" />
-    <ClInclude Include="include\InternalGameLib\GameInitializer.hpp" />
+    <ClInclude Include="src\InternalGameLib\Interface\GameInitializer.hpp" />
     <ClInclude Include="include\InternalGameLib\GameShutDown.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLibHandlers.hpp" />
@@ -218,6 +218,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameLib.cpp" />
     <ClCompile Include="src\InternalGameLib\SDLImpl\SDLGameShutDown.cpp" />
     <ClCompile Include="src\View.cpp" />
+    <ClCompile Include="src\Window\App.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

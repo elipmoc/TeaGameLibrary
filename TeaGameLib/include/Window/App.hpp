@@ -2,51 +2,29 @@
 #include "App/Actor.hpp"
 #include"App/ProcessInput.hpp"
 #include "App/EffectParams.hpp"
-#include "../View.hpp"
-#include "../ResourceManager.hpp"
 #include "../Input.hpp"
 #include "../WindowEvent.hpp"
-#include "../GameWorld.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
-#include "../InternalGameLib/GameInitializer.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
 #include "../InternalGameLib/DrawService.hpp"
+#include "App/WindowData.hpp"
 
 namespace teaGameLib {
-
-	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
-	EffectHandler* GameWorld::effectHandler;
-	KeyStates Input::keyStates;
-	EventStates WindowEvent::eventStates;
-
-	struct App {
-	private:
-
+	class App {
 		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
 		View view;
+		EffectHandler effectHandler;
 
-		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)
-			:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }){
-			ResourceManager::Init(internalGameLibHandlersPtr);
-		}
+		App(InternalGameLibHandlersPtr internalGameLibHandlersPtr);
 
 	public:
 
-		static App CreateApp(WindowData windowData) {
-			std::optional<InternalGameLibHandlersPtr> internalGameLibHandlers = GameInitializer::Init(windowData);
-			if (internalGameLibHandlers.has_value() == false) {
-				throw "";
-			}
-			return App{ internalGameLibHandlers.value() };
-		}
-
+		static App CreateApp(WindowData windowData);
 
 		template<typename StartActor, typename UpdateMsgFunc>
 		void Start(StartActor startActor, UpdateMsgFunc updateMsgFunc) {
 			using Msg = std::invoke_result_t<UpdateMsgFunc, float>;
 			std::queue<Msg> queue;
-			EffectHandler effectHandler{ };
-			GameWorld::Init(effectHandler);
 			EffectParams<Msg> effectParams{ CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();

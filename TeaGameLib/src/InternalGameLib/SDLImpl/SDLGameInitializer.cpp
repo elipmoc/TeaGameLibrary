@@ -1,4 +1,4 @@
-#include "InternalGameLib/GameInitializer.hpp"
+#include "../Interface/GameInitializer.hpp"
 #include "SDLHandlers.hpp"
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
