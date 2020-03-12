@@ -6,7 +6,7 @@ namespace teaGameLib {
 		return input::KeyStates{ SDL_GetKeyboardState(NULL) };
 	}
 
-	EventStates GetEventStates() {
+	windowEvent::EventStates GetEventStates() {
 		SDL_Event event;
 		bool isQuit = false;
 		while (SDL_PollEvent(&event))
@@ -18,6 +18,6 @@ namespace teaGameLib {
 				break;
 			}
 		}
-		return EventStates{ isQuit };
+		return windowEvent::EventStates{ isQuit };
 	}
 }

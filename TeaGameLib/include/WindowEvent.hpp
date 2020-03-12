@@ -5,9 +5,9 @@
 
 namespace teaGameLib {
 	class WindowEvent {
-		static EventStates eventStates;
+		static windowEvent::EventStates eventStates;
 		
-		static void Init(const EventStates& _eventStates) {
+		static void Init(const windowEvent::EventStates& _eventStates) {
 			eventStates = _eventStates;
 		}
 		friend class App;

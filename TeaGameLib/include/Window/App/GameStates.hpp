@@ -1,10 +1,10 @@
 #pragma once
 #include "../../Input/KeyStates.hpp"
-#include "GameStates/EventStates.hpp"
+#include "../../WindowEvent/EventStates.hpp"
 
 namespace teaGameLib {
 	struct GameStates {
-		EventStates eventStates;
+		windowEvent::EventStates eventStates;
 		input::KeyStates keyStates={};
 	};
 }

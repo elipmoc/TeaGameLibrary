@@ -36,9 +36,6 @@
     <ClInclude Include="include\Window\App\EffectMsgQueueFactory\CreateCommonEffectMsgQueue.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\GameStates\EventStates.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\Actor.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="include\GameWorld\GameWorldData.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WindowEvent\EventStates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
