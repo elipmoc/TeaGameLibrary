@@ -43,15 +43,15 @@ namespace teaGameLib {
 		void Start(StartActor startActor, UpdateMsgFunc updateMsgFunc) {
 			using Msg = std::invoke_result_t<UpdateMsgFunc, float>;
 			std::queue<Msg> queue;
-			EffectHandler effectHandler{ GameStates{} };
+			EffectHandler effectHandler{ };
 			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();
 			initCmd.InvokeRunFunc(effectParams);
 			while (effectParams.effectHandler.GetIsRunning()) {
-				effectParams.effectHandler = EffectHandler::SetEventStates(std::move(effectParams.effectHandler), ProcessInput());
-				Input::Init(effectParams.effectHandler.GetGameStates().keyStates);
-				WindowEvent::Init(effectParams.effectHandler.GetGameStates().eventStates);
+				GameStates gameStates = ProcessInput();
+				Input::Init(gameStates.keyStates);
+				WindowEvent::Init(gameStates.eventStates);
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
 				float deltaTime = FpsWaitTicks(ticksCount);
 				effectParams.effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
