@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/Effect.hpp"
-#include "Window/App/EffectParams.hpp"
+#include "Window/App/EffectMsgQueue.hpp"
 #include "InternalGameLib/Resource/ResourceLoader.hpp"
 
 namespace teaGameLib {
@@ -17,12 +17,12 @@ namespace teaGameLib {
 		template<typename Msg, typename MsgFunc>
 		static Cmd<Msg> GetTexturePtr(const std::string& fileName, MsgFunc msgFunc) {
 
-			return { [fileName,msgFunc](EffectParams<Msg> effectParams) {
+			return { [fileName,msgFunc](EffectMsgQueue<Msg> effectMsgQueue) {
 					auto result = resource::ResourceLoader::LoadTexture(
 							fileName,
 							internalGameLibHandlersPtr);
 					
-					effectParams.effectMsgQueue.InQueueMsg(msgFunc(result));
+					effectMsgQueue.InQueueMsg(msgFunc(result));
 			} };
 		}
 	};

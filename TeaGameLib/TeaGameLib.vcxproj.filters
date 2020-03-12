@@ -54,9 +54,6 @@
     <ClInclude Include="include\Window\App\EffectMsgQueue.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\EffectParams.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\GameStates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>

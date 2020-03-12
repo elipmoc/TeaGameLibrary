@@ -1,13 +1,14 @@
 #pragma once
 #include "App/Actor.hpp"
 #include"App/ProcessInput.hpp"
-#include "App/EffectParams.hpp"
 #include "../Input.hpp"
 #include "../WindowEvent.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
 #include "../InternalGameLib/DrawService.hpp"
 #include "App/WindowData.hpp"
+#include "App/EffectMsgQueueFactory/CreateCommonEffectMsgQueue.hpp"
+#include "App/EffectHandler.hpp"
 
 namespace teaGameLib {
 	class App {
@@ -19,26 +20,26 @@ namespace teaGameLib {
 
 	public:
 
-		static App CreateApp(WindowData windowData);
+		static App CreateApp(WindowData);
 
 		template<typename StartActor, typename UpdateMsgFunc>
 		void Start(StartActor startActor, UpdateMsgFunc updateMsgFunc) {
 			using Msg = std::invoke_result_t<UpdateMsgFunc, float>;
 			std::queue<Msg> queue;
-			EffectParams<Msg> effectParams{ CreateCommonEffectMsgQueue<Msg>(queue) };
+			EffectMsgQueue<Msg> effectMsgQueue = CreateCommonEffectMsgQueue<Msg>(queue);
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();
-			initCmd.InvokeRunFunc(effectParams);
+			initCmd.InvokeRunFunc(effectMsgQueue);
 			while (effectHandler.GetIsRunning()) {
 				GameStates gameStates = ProcessInput();
 				Input::Init(gameStates.keyStates);
 				WindowEvent::Init(gameStates.eventStates);
-				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectParams);
+				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectMsgQueue);
 				float deltaTime = FpsWaitTicks(ticksCount);
-				effectParams.effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
+				effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
 
 				model = std::move(
-					UpdateMsgQueue(queue, std::move(model), startActor, effectParams)
+					UpdateMsgQueue(queue, std::move(model), startActor, effectMsgQueue)
 				);
 
 				DrawService::Draw(
@@ -53,21 +54,21 @@ namespace teaGameLib {
 	private:
 
 		template<typename StartActor, typename Msg, typename Model>
-		Model&& UpdateMsgQueue(std::queue<Msg>& queue, Model&& model, const StartActor startActor, EffectParams<Msg>& effectParams) {
+		Model&& UpdateMsgQueue(std::queue<Msg>& queue, Model&& model, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
 			while (true) {
 				auto optMsg = DeQueueMsg<Msg,Model>(queue);
 				if (optMsg.has_value() == false)break;
-				model = std::move(Update(std::move(model), optMsg.value(), startActor, effectParams));
+				model = std::move(Update(std::move(model), optMsg.value(), startActor, effectMsgQueue));
 			}
 			return std::move(model);
 		}
 
 		template<typename StartActor, typename Msg, typename Model>
-		Model&& Update(Model&& model, const Msg& msg, const StartActor startActor, EffectParams<Msg>& effectParams) {
+		Model&& Update(Model&& model, const Msg& msg, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
 			auto updateData
 				= startActor.InvokeUpdateFunc(msg, std::move(model));
 			model = std::move(updateData.model);
-			updateData.cmd.InvokeRunFunc(effectParams);
+			updateData.cmd.InvokeRunFunc(effectMsgQueue);
 			return std::move(model);
 		}
 

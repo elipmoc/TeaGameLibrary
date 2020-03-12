@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/Effect.hpp"
-#include "Window/App/EffectParams.hpp"
+#include "Window/App/EffectMsgQueue.hpp"
 
 namespace teaGameLib {
 	class WindowEvent {
@@ -17,9 +17,9 @@ namespace teaGameLib {
 		template<typename Msg>
 		static Sub<Msg> Quit(Msg msg) {
 			return{
-				[msg](EffectParams<Msg> effectParams) {
+				[msg](EffectMsgQueue<Msg> effectMsgQueue) {
 					if (eventStates.isQuit)
-						effectParams.effectMsgQueue.InQueueMsg(msg);
+						effectMsgQueue.InQueueMsg(msg);
 				}
 			};
 		}

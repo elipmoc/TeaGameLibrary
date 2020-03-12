@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include <optional>
-#include "../Window/App/EffectParams.hpp"
+#include "../Window/App/EffectMsgQueue.hpp"
 
 namespace teaGameLib {
 	template<typename Msg>
@@ -9,21 +9,21 @@ namespace teaGameLib {
 	public:
 		using OptMsg = std::optional<Msg>;
 		using EffectMsg = Msg;
-		using RunFunc = std::function<void(EffectParams<Msg>)>;
+		using RunFunc = std::function<void(EffectMsgQueue<Msg>)>;
 	private:
 		const RunFunc runFunc;
 	public:
 		constexpr Effect(RunFunc runFunc) :runFunc(runFunc) {}
-		constexpr Effect() :runFunc([](EffectParams<Msg> _) {}) {}
+		constexpr Effect() : runFunc([](EffectMsgQueue<Msg> _) {}) {}
 
-		void InvokeRunFunc(EffectParams<Msg> effectParams) const { runFunc(effectParams); };
+		void InvokeRunFunc(EffectMsgQueue<Msg> effectMsgQueue) const { runFunc(effectMsgQueue); };
 
 		template<typename NewMsg>
 		Effect<NewMsg> Map(std::function<NewMsg(Msg)> mapFunc)const {
 			return Effect<NewMsg>{
-				[runFunc = runFunc, mapFunc = mapFunc](EffectParams<NewMsg> effectParams) {
+				[runFunc = runFunc, mapFunc = mapFunc](EffectMsgQueue<NewMsg> effectMsgQueue) {
 					runFunc(
-						EffectParams<Msg>{effectParams.effectHandler, effectParams.effectMsgQueue.Map(mapFunc) }
+						EffectMsgQueue<Msg>{effectMsgQueue.Map(mapFunc) }
 					);
 				}
 			};
@@ -37,16 +37,16 @@ namespace teaGameLib {
 		template<typename HeadEffect, typename... Effects>
 		static Effect<Msg> Batch(HeadEffect headEffect, Effects... effects)
 		{
-			return Effect<Msg>{ [headEffect = headEffect, effects...] (EffectParams<Msg> effectParams) {
-				headEffect.InvokeRunFunc(effectParams);
-				Batch(effects...).InvokeRunFunc(effectParams);
+			return Effect<Msg>{ [headEffect = headEffect, effects...] (EffectMsgQueue<Msg> effectMsgQueue) {
+				headEffect.InvokeRunFunc(effectMsgQueue);
+				Batch(effects...).InvokeRunFunc(effectMsgQueue);
 			}};
 		}
 
 		static Effect<Msg> None() { return Effect<Msg>{}; }
 		static Effect<Msg> Id(Msg msg) {
 			return {
-				[msg](EffectParams<Msg> effectParams) {effectParams.effectMsgQueue.InQueueMsg(msg); }
+				[msg](EffectMsgQueue<Msg> effectMsgQueue) {effectMsgQueue.InQueueMsg(msg); }
 			};
 		}
 	};

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/Effect.hpp"
-#include "Window/App/EffectParams.hpp"
+#include "Window/App/EffectMsgQueue.hpp"
 #include "Window/App/GameStates/KeyStates.hpp"
 
 namespace teaGameLib {
@@ -15,14 +15,14 @@ namespace teaGameLib {
 	public:
 		template<typename Msg>
 		static Cmd<Msg> EndGame() {
-			return { [](EffectParams<Msg>) {
+			return { [](EffectMsgQueue<Msg>) {
 				effectHandler->EndGame();
 			} };
 		}
 
 		template<typename Msg>
 		static Cmd<Msg> SetBackGroundColor(const Color& color) {
-			return { [color](EffectParams<Msg>) {
+			return { [color](EffectMsgQueue<Msg>) {
 				effectHandler->SetBackGroundColor(color);
 			} };
 		}
