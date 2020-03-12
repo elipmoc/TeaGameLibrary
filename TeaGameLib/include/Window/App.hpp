@@ -6,6 +6,7 @@
 #include "../ResourceManager.hpp"
 #include "../Input.hpp"
 #include "../WindowEvent.hpp"
+#include "../GameWorld.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/GameInitializer.hpp"
 #include "../InternalGameLib/GameShutDown.hpp"
@@ -14,6 +15,7 @@
 namespace teaGameLib {
 
 	InternalGameLibHandlersPtr ResourceManager::internalGameLibHandlersPtr;
+	EffectHandler* GameWorld::effectHandler;
 	KeyStates Input::keyStates;
 	EventStates WindowEvent::eventStates;
 
@@ -44,6 +46,7 @@ namespace teaGameLib {
 			using Msg = std::invoke_result_t<UpdateMsgFunc, float>;
 			std::queue<Msg> queue;
 			EffectHandler effectHandler{ };
+			GameWorld::Init(effectHandler);
 			EffectParams<Msg> effectParams{ effectHandler,CreateCommonEffectMsgQueue<Msg>(queue) };
 			int ticksCount = 0;
 			auto [initCmd, model] = startActor.InvokeInitFunc();
