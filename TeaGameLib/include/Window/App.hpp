@@ -1,6 +1,6 @@
 #pragma once
 #include "App/Actor.hpp"
-#include"App/ProcessInput.hpp"
+#include"../InternalGameLib/InternalGameLib.hpp"
 #include "../Input.hpp"
 #include "../WindowEvent.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
@@ -30,9 +30,8 @@ namespace teaGameLib {
 			auto [initCmd, model] = startActor.InvokeInitFunc();
 			initCmd.InvokeRunFunc(effectMsgQueue);
 			while (gameWorldData.GetIsRunning()) {
-				GameStates gameStates = ProcessInput();
-				Input::Init(gameStates.keyStates);
-				WindowEvent::Init(gameStates.eventStates);
+				Input::Init(GetKeyStates());
+				WindowEvent::Init(GetEventStates());
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectMsgQueue);
 				float deltaTime = FpsWaitTicks(ticksCount);
 				effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));

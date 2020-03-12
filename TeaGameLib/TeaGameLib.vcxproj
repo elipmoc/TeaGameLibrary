@@ -197,7 +197,6 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="src\InternalGameLib\Interface\GameShutDown.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLib.hpp" />
     <ClInclude Include="include\InternalGameLib\InternalGameLibHandlers.hpp" />
-    <ClInclude Include="include\Window\App\ProcessInput.hpp" />
     <ClInclude Include="include\Window\App\UpdateData.hpp" />
     <ClInclude Include="include\GameWorld.hpp" />
     <ClInclude Include="include\Input.hpp" />

@@ -45,9 +45,6 @@
     <ClInclude Include="include\Window\App\GameStates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\App\ProcessInput.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Window\App\UpdateData.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
