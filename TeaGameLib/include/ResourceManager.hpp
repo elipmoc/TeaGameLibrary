@@ -8,12 +8,11 @@ namespace teaGameLib {
 	class ResourceManager {
 
 		static InternalGameLibHandlersPtr internalGameLibHandlersPtr;
-
-	public:
-
 		static void Init(InternalGameLibHandlersPtr _internalGameLibHandlersPtr) {
 			ResourceManager::internalGameLibHandlersPtr = _internalGameLibHandlersPtr;
 		}
+		friend class App;
+	public:
 
 		template<typename Msg, typename MsgFunc>
 		static Cmd<Msg> GetTexturePtr(const std::string& fileName, MsgFunc msgFunc) {

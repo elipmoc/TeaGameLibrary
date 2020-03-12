@@ -7,10 +7,14 @@
 namespace teaGameLib {
 	class Input {
 		static KeyStates keyStates;
-	public:
+		
 		static void Init(const KeyStates& _keyStates) {
 			keyStates = _keyStates;
 		}
+
+		friend class App;
+
+	public:
 
 		template<typename Msg>
 		static Sub<Msg> KeyInput(KeyCode keyCode, Msg msg) {

@@ -6,10 +6,13 @@
 namespace teaGameLib {
 	class WindowEvent {
 		static EventStates eventStates;
-	public:
+		
 		static void Init(const EventStates& _eventStates) {
 			eventStates = _eventStates;
 		}
+		friend class App;
+
+	public:
 
 		template<typename Msg>
 		static Sub<Msg> Quit(Msg msg) {
