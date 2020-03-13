@@ -10,8 +10,8 @@ namespace teaGameLib {
 		const math::Vector2D<int>& centerPos)
 	{
 		SDL_Rect r{
-			centerPos.x,
-			centerPos.y,
+			centerPos.x - textureResource.GetWidth() / 2,
+			centerPos.y - textureResource.GetHeight() / 2,
 			textureResource.GetWidth(),
 			textureResource.GetHeight()
 		};
