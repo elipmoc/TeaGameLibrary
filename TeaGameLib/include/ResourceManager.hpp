@@ -25,5 +25,26 @@ namespace teaGameLib {
 					effectMsgQueue.InQueueMsg(msgFunc(result));
 			} };
 		}
+
+		template<typename Msg, typename MsgFunc>
+		static Cmd<Msg> GetTextureResources(const std::vector<std::string>& fileNames, MsgFunc msgFunc) {
+
+			return { [fileNames = std::move(fileNames),msgFunc] (EffectMsgQueue<Msg> effectMsgQueue) {
+				std::vector<resource::TextureResource> textureResources;
+				for (const auto& fileName : fileNames) {
+					auto result = resource::ResourceLoader::LoadTexture(
+						fileName,
+						internalGameLibHandlersPtr);
+					if (result.has_value() == false) {
+						effectMsgQueue.InQueueMsg(msgFunc(std::nullopt));
+						return;
+					}
+					textureResources.emplace_back(result.value());
+				}
+
+				effectMsgQueue.InQueueMsg(msgFunc(std::optional{ std::move(textureResources) }));
+			} };
+		}
+
 	};
 }
