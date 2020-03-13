@@ -2,6 +2,7 @@
 
 #include "Platform/Effect.hpp"
 #include "Window/App/EffectMsgQueue.hpp"
+#include "WindowEvent/EventStates.hpp"
 
 namespace teaGameLib {
 	class WindowEvent {

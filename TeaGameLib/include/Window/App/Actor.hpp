@@ -1,8 +1,8 @@
 #pragma once
 #include "UpdateData.hpp"
-#include "../../View.hpp"
 
 namespace teaGameLib {
+	class View;
 
 	template<typename InitFunc, typename UpdateFunc, typename SubscriptionFunc, typename ViewFunc>
 	struct Actor {

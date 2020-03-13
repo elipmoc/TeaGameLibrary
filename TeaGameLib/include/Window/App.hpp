@@ -1,6 +1,6 @@
 #pragma once
 #include "App/Actor.hpp"
-#include"../InternalGameLib/InternalGameLib.hpp"
+#include "../View.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/DrawService.hpp"
 #include "App/WindowData.hpp"

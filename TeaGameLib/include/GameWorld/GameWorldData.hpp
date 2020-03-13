@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Color.hpp"
-#include "../Window/App/EffectMsgQueue.hpp"
 
 namespace teaGameLib::gameWorld {
 

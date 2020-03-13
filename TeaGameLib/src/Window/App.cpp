@@ -4,6 +4,7 @@
 #include "Input.hpp"
 #include "WindowEvent.hpp"
 #include "ResourceManager.hpp"
+#include"InternalGameLib/InternalGameLib.hpp"
 #include "../InternalGameLib/Interface/GameShutDown.hpp"
 #include "../InternalGameLib/Interface/GameInitializer.hpp"
 
