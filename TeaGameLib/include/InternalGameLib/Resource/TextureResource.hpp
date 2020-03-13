@@ -10,6 +10,7 @@ namespace teaGameLib::resource {
 		std::shared_ptr<TextureResourceImpl> impl;
 	public:
 		TextureResource(std::shared_ptr<TextureResourceImpl> impl);
+		TextureResource();
 		~TextureResource();
 
 		int GetWidth()const;

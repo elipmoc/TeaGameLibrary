@@ -21,6 +21,8 @@ namespace teaGameLib {
 		InternalGameLibHandlersPtr& sdlHandlers, const resource::TextureResource& textureResource,
 		const math::Vector2D<int>& centerPos, const math::Vector2D<float>& scale, double angle)
 	{
+		if (textureResource.GetImpl()->ptr == nullptr)return;
+
 		const float width = textureResource.GetWidth() * scale.x;
 		const float height = textureResource.GetHeight() * scale.y;
 
@@ -37,6 +39,5 @@ namespace teaGameLib {
 			angle,
 			nullptr,
 			SDL_FLIP_NONE);
-
 	}
 }
