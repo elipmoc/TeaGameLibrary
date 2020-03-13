@@ -15,7 +15,7 @@ namespace teaGameLib {
 	public:
 
 		template<typename Msg, typename MsgFunc>
-		static Cmd<Msg> GetTexturePtr(const std::string& fileName, MsgFunc msgFunc) {
+		static Cmd<Msg> GetTextureResource(const std::string& fileName, MsgFunc msgFunc) {
 
 			return { [fileName,msgFunc](EffectMsgQueue<Msg> effectMsgQueue) {
 					auto result = resource::ResourceLoader::LoadTexture(
