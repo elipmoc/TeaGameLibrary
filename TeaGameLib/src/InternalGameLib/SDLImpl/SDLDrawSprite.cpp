@@ -9,18 +9,34 @@ namespace teaGameLib {
 		const resource::TextureResource& textureResource,
 		const math::Vector2D<int>& centerPos)
 	{
+		DrawSprite(sdlHandlers, textureResource, centerPos, 0);
+	}
+	void DrawSprite(
+		InternalGameLibHandlersPtr& sdlHandlers, const resource::TextureResource& textureResource,
+		const math::Vector2D<int>& centerPos, double angle)
+	{
+		DrawSprite(sdlHandlers, textureResource, centerPos, { 1.0f,1.0f }, angle);
+	}
+	void DrawSprite(
+		InternalGameLibHandlersPtr& sdlHandlers, const resource::TextureResource& textureResource,
+		const math::Vector2D<int>& centerPos, const math::Vector2D<float>& scale, double angle)
+	{
+		const float width = textureResource.GetWidth() * scale.x;
+		const float height = textureResource.GetHeight() * scale.y;
+
 		SDL_Rect r{
-			centerPos.x - textureResource.GetWidth() / 2,
-			centerPos.y - textureResource.GetHeight() / 2,
-			textureResource.GetWidth(),
-			textureResource.GetHeight()
+			centerPos.x - static_cast<int>(width / 2),
+			centerPos.y - static_cast<int>(height / 2),
+			static_cast<int>(width),
+			static_cast<int>(height)
 		};
 		SDL_RenderCopyEx(sdlHandlers->sdlRendererPtr,
 			textureResource.GetImpl()->ptr,
 			nullptr,
 			&r,
-			0,
+			angle,
 			nullptr,
 			SDL_FLIP_NONE);
+
 	}
 }

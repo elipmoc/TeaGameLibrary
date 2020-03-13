@@ -13,4 +13,12 @@ namespace teaGameLib {
 	void View::DrawSprite(const resource::TextureResource& textureResource, const math::Vector2D<int>& centerPos) {
 		teaGameLib::DrawSprite(internalGameLibHandlersPtr, textureResource, centerPos);
 	}
+	void View::DrawSprite(const resource::TextureResource& textureResource, const math::Vector2D<int>& centerPos, double angle)
+	{
+		teaGameLib::DrawSprite(internalGameLibHandlersPtr, textureResource, centerPos,angle);
+	}
+	void View::DrawSprite(const resource::TextureResource& textureResource, const math::Vector2D<int>& centerPos, const math::Vector2D<float>& scale, double angle)
+	{
+		teaGameLib::DrawSprite(internalGameLibHandlersPtr, textureResource, centerPos, scale, angle);
+	}
 }
