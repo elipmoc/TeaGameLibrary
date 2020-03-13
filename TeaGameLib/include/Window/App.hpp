@@ -1,8 +1,6 @@
 #pragma once
 #include "App/Actor.hpp"
 #include"../InternalGameLib/InternalGameLib.hpp"
-#include "../Input.hpp"
-#include "../WindowEvent.hpp"
 #include "../InternalGameLib/FpsWaitTicks.hpp"
 #include "../InternalGameLib/DrawService.hpp"
 #include "App/WindowData.hpp"
@@ -10,6 +8,36 @@
 #include "../GameWorld/GameWorldData.hpp"
 
 namespace teaGameLib {
+
+	template<typename Msg>
+	std::optional<Msg> DeQueueMsg(std::queue<Msg>& queue) {
+		if (queue.size() == 0)return std::optional<Msg>{std::nullopt};
+		auto msg = queue.front();
+		queue.pop();
+		return std::optional<Msg>{msg};
+	}
+
+	template<typename StartActor, typename Msg, typename Model>
+	Model&& UpdateMsgQueue(std::queue<Msg>& queue, Model&& model, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
+		while (true) {
+			auto optMsg = DeQueueMsg<Msg>(queue);
+			if (optMsg.has_value() == false)break;
+			model = Update(std::move(model), optMsg.value(), startActor, effectMsgQueue);
+		}
+		return std::move(model);
+	}
+
+	template<typename StartActor, typename Msg, typename Model>
+	Model&& Update(Model&& model, const Msg& msg, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
+		auto updateData
+			= startActor.InvokeUpdateFunc(msg, std::move(model));
+		model = std::move(updateData.model);
+		updateData.cmd.InvokeRunFunc(effectMsgQueue);
+		return std::move(model);
+	}
+
+
+
 	class App {
 		InternalGameLibHandlersPtr internalGameLibHandlersPtr;
 		View view;
@@ -30,15 +58,13 @@ namespace teaGameLib {
 			auto [initCmd, model] = startActor.InvokeInitFunc();
 			initCmd.InvokeRunFunc(effectMsgQueue);
 			while (gameWorldData.GetIsRunning()) {
-				Input::Init(GetKeyStates());
-				WindowEvent::Init(GetEventStates());
+				UpdateInput();
 				startActor.InvokeSubscriptionFunc(model).InvokeRunFunc(effectMsgQueue);
 				float deltaTime = FpsWaitTicks(ticksCount);
 				effectMsgQueue.InQueueMsg(updateMsgFunc(deltaTime));
 
-				model = std::move(
-					UpdateMsgQueue(queue, std::move(model), startActor, effectMsgQueue)
-				);
+				model =
+					UpdateMsgQueue(queue, std::move(model), startActor, effectMsgQueue);
 
 				DrawService::Draw(
 					internalGameLibHandlersPtr,
@@ -52,31 +78,6 @@ namespace teaGameLib {
 
 	private:
 
-		template<typename StartActor, typename Msg, typename Model>
-		Model&& UpdateMsgQueue(std::queue<Msg>& queue, Model&& model, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
-			while (true) {
-				auto optMsg = DeQueueMsg<Msg,Model>(queue);
-				if (optMsg.has_value() == false)break;
-				model = std::move(Update(std::move(model), optMsg.value(), startActor, effectMsgQueue));
-			}
-			return std::move(model);
-		}
-
-		template<typename StartActor, typename Msg, typename Model>
-		Model&& Update(Model&& model, const Msg& msg, const StartActor startActor, EffectMsgQueue<Msg>& effectMsgQueue) {
-			auto updateData
-				= startActor.InvokeUpdateFunc(msg, std::move(model));
-			model = std::move(updateData.model);
-			updateData.cmd.InvokeRunFunc(effectMsgQueue);
-			return std::move(model);
-		}
-
-		template<typename Msg, typename Model>
-		std::optional<Msg> DeQueueMsg(std::queue<Msg>& queue) {
-			if (queue.size() == 0)return std::optional<Msg>{std::nullopt};
-			auto msg = queue.front();
-			queue.pop();
-			return std::optional<Msg>{msg};
-		}
+		void UpdateInput();
 	};
 }

@@ -1,9 +1,9 @@
 #include "TeaGameLib/Window/App.hpp"
 #include "TeaGameLib/GameWorld.hpp"
 #include "TeaGameLib/Input.hpp"
+#include "TeaGameLib/ResourceManager.hpp"
 #include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/Variant.hpp"
-#include "TeaGameLib/Algorithm.hpp"
 
 namespace tea = teaGameLib;
 using GameWorld = tea::GameWorld;

@@ -1,6 +1,8 @@
 #include "Window/App.hpp"
 #include "View.hpp"
 #include "GameWorld.hpp"
+#include "Input.hpp"
+#include "WindowEvent.hpp"
 #include "ResourceManager.hpp"
 #include "../InternalGameLib/Interface/GameShutDown.hpp"
 #include "../InternalGameLib/Interface/GameInitializer.hpp"
@@ -11,6 +13,12 @@ namespace teaGameLib {
 	gameWorld::GameWorldData* GameWorld::gameWorldData;
 	input::KeyStates Input::keyStates;
 	windowEvent::EventStates WindowEvent::eventStates;
+
+	void App::UpdateInput()
+	{
+		Input::Init(GetKeyStates());
+		WindowEvent::Init(GetEventStates());
+	}
 
 	App::App(InternalGameLibHandlersPtr internalGameLibHandlersPtr)
 		:internalGameLibHandlersPtr(internalGameLibHandlersPtr), view({ internalGameLibHandlersPtr }) {
@@ -30,4 +38,5 @@ namespace teaGameLib {
 	{
 		GameShutDown::ShutDown(std::move(internalGameLibHandlersPtr));
 	}
+
 }
