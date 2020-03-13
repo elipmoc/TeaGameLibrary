@@ -179,6 +179,7 @@ move "$(ProjectDir)$(Configuration)\include\include" "$(ProjectDir)$(Configurati
     <ClInclude Include="include\Math\Vector2D.hpp" />
     <ClInclude Include="include\InternalGameLib\Resource\ResourceLoader.hpp" />
     <ClInclude Include="include\ResourceManager.hpp" />
+    <ClInclude Include="include\UtilModel\AnimSpriteModel.hpp" />
     <ClInclude Include="include\Variant.hpp" />
     <ClInclude Include="include\View.hpp" />
     <ClInclude Include="include\Window\App.hpp" />
