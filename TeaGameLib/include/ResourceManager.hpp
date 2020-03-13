@@ -36,7 +36,7 @@ namespace teaGameLib {
 						fileName,
 						internalGameLibHandlersPtr);
 					if (result.has_value() == false) {
-						effectMsgQueue.InQueueMsg(msgFunc(std::nullopt));
+						effectMsgQueue.InQueueMsg(msgFunc(std::optional<std::vector<resource::TextureResource>>{ }));
 						return;
 					}
 					textureResources.emplace_back(result.value());
