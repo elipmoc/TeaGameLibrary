@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Window/App/GameStates.hpp"
 #include "../Color.hpp"
 #include "../Window/App/EffectMsgQueue.hpp"
 
