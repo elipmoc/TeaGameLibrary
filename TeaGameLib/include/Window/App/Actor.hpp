@@ -2,7 +2,7 @@
 #include "UpdateData.hpp"
 
 namespace teaGameLib {
-	class View;
+	struct View;
 
 	template<typename InitFunc, typename UpdateFunc, typename SubscriptionFunc, typename ViewFunc>
 	struct Actor {
