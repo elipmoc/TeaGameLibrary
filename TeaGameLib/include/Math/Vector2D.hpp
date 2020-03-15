@@ -60,7 +60,7 @@ namespace teaGameLib::math {
 			y = tmp;
 		}
 
-		static constexpr Vector2D<T> Zero()noexcept { return Vector2D<int>{}.StaticCast<T>(); };
+		static constexpr Vector2D<T> Zero()noexcept { return Vector2D<int>{0,0}.StaticCast<T>(); };
 		static constexpr Vector2D<T> Up()noexcept { return Vector2D<int>{ 0, -1 }.StaticCast<T>(); };
 		static constexpr Vector2D<T> Down()noexcept { return Vector2D<int>{ 0, 1 }.StaticCast<T>(); };
 		static constexpr Vector2D<T> Left()noexcept { return Vector2D<int>{ -1, 0 }.StaticCast<T>(); };
