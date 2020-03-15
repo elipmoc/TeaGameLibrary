@@ -4,6 +4,7 @@
 #include "TeaGameLib/View.hpp"
 #include "TeaGameLib/Variant.hpp" 
 #include "TeaGameLib/Input.hpp"
+#include "CommonMsg.hpp"
 
 namespace ship {
 
@@ -20,38 +21,33 @@ namespace ship {
 	};
 
 	struct MsgType { 
-		struct Update { float deltaTime; }; 
 		struct AddPos { Vector2D<float> addPos; };
 	};
 
-	using Msg =tea::Variant<MsgType::Update,MsgType::AddPos>;
+	using Msg =tea::Variant<commonMsg::Update,MsgType::AddPos>;
 
 
 	using Cmd = tea::Cmd<Msg>;
 	using Sub = tea::Sub<Msg>;
 
-	inline UpdateData<Model, Msg> Init(std::vector<TextureResource>&& shipTextureResources) {
-		return { 
-			Cmd::None(),
-			Model{
+	inline Model Init(std::vector<TextureResource>&& shipTextureResources) {
+		return Model{
 				AnimSpriteModel{std::move(shipTextureResources),24}
-			}
 		};
 	}
 
-	inline UpdateData<Model, Msg> Update(Msg msg, Model&& model) {
-		ret_match(msg) ->UpdateData<Model, Msg> {
-			case(msg, MsgType::Update) {
+	inline Model Update(Msg msg, Model&& model) {
+		ret_match(msg) ->Model {
+			case(msg, commonMsg::Update) {
 				model.animSpriteModel.Update(msg.deltaTime);
 				model.pos += model.addPos * msg.deltaTime * 200;
 				model.addPos = Vector2D<float>::Zero();
-				return { Cmd::None() ,std::move(model) };
+				return std::move(model) ;
 			}
 			case(msg, MsgType::AddPos) {
 				model.addPos += msg.addPos;
-				return { Cmd::None() ,std::move(model) };
+				return std::move(model) ;
 			}
-
 		}match_end;
 	}
 
@@ -65,6 +61,6 @@ namespace ship {
 	};
 
 	inline void View(const Model& model, tea::View& view) {
-		view.DrawSprite(model.animSpriteModel.GetCurrentTextureResource(), model.pos.StaticCast<int>());
+		view.DrawSprite(model.animSpriteModel.GetCurrentTextureResource(), model.pos.StaticCast<int>(), { 1.5,1.5 });
 	}
 }
