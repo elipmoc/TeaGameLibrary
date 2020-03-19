@@ -3,7 +3,6 @@
 #include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/Input.hpp"
 #include "TeaGameLib/ResourceManager.hpp"
-#include "TeaGameLib/WindowEvent.hpp"
 #include "TeaGameLib/Variant.hpp"
 #include "TeaGameLib/UtilModel/AnimSpriteModel.hpp"
 #include "Ship.cpp"
